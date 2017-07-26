@@ -2,12 +2,12 @@
 
 int num = 1;
 
-void putNumtoArr(int arr[][8][8][8]); // ¹è¿­¿¡ ¼ıÀÚ¸¦ ³Ö´Â ÇÔ¼ö
-void printArr(int arr[][8][8][8]); // ¹è¿­À» ¸ğµÎ Ãâ·ÂÇÏ´Â ÇÔ¼ö
+void putNumtoArr(int arr[][8][8][8]); // ë°°ì—´ì— ìˆ«ìë¥¼ ë„£ëŠ” í•¨ìˆ˜
+void printArr(int arr[][8][8][8]); // ë°°ì—´ì„ ëª¨ë‘ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
 
 int main()
 {
-	int arr[8][8][8][8] = { 0 }; // 4Â÷¿ø ¹è¿­ arrÀ» ¼±¾ğ
+	int arr[8][8][8][8] = { 0 }; // 4ì°¨ì› ë°°ì—´ arrì„ ì„ ì–¸
 
 	putNumtoArr(arr);
 	printArr(arr);

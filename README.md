@@ -1,4 +1,4 @@
 # KyeongHo
 My study repository
 
-2014년 대학교 1학년때 작성한 코드들
+대학교 1학년 및 2학년 1학기 때 작성한 코드 

@@ -1,9 +1,4 @@
-package me.koobin.algorism.programers;
-
-import java.util.ArrayList;
 import java.util.Arrays;
-
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 public class solution2 {
     public int[][] solution1(int[][] arr1, int[][] arr2) {

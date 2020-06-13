@@ -1,6 +1,3 @@
-package me.koobin.algorism.programers;
-// «¡∑ª¡Ó4∫Ì∑œ
-
 public class solution {
 	public int solution(int m, int n, String[] board) {
 		int answer = 0;

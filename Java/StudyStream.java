@@ -69,7 +69,11 @@ public class StudyStream {
 		Stream<String> stream2 = Stream.of("Python", "Go", "Swift");
 		Stream<String> concat = Stream.concat(stream1, stream2);
 		// [Java, Scala, Groovy, Python, Go, Swift]
-		
+		OptionalInt reduced = 
+  		IntStream.range(1, 4) // [1, 2, 3]
+  			.reduce((a, b) -> {
+  			  return Integer.sum(a, b);
+  			});
 	}
 	
 	//��� �ִ� ��Ʈ��

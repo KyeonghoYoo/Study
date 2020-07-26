@@ -64,11 +64,17 @@ public class StudyStream {
 		// �÷��ǰ� �迭�� �ƴ� ��쿣 parallel �޼ҵ带 Ȱ���Ͽ� ó���Ѵ�.
 		IntStream intParallelStream = IntStream.range(1, 150).parallel();
 		isParallel = intStream.isParallel();
-		// Stream.concat 메소드를 이용해 두 개의 스트림을 연결하여 새로운 스트림 만들기
+
+		// 시퀀셜 모드로 돌리고 싶다면 sequential()를 사용한다.
+		intParallelStream = intStream.sequential();
+		isParallel = intStream.isParallel();
+		
+		// Stream.concat 메소드를 이용해 두 개의 스트림을 연결하여 새로운 스트림을 만들어낼 수도 있다.
 		Stream<String> stream1 = Stream.of("Java", "Scala", "Groovy");
 		Stream<String> stream2 = Stream.of("Python", "Go", "Swift");
 		Stream<String> concat = Stream.concat(stream1, stream2);
 		// [Java, Scala, Groovy, Python, Go, Swift]
+
 		OptionalInt reduced = 
   		IntStream.range(1, 4) // [1, 2, 3]
   			.reduce((a, b) -> {

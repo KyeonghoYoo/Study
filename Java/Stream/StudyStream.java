@@ -75,11 +75,13 @@ public class StudyStream {
 		Stream<String> concat = Stream.concat(stream1, stream2);
 		// [Java, Scala, Groovy, Python, Go, Swift]
 
-		OptionalInt reduced = 
-  		IntStream.range(1, 4) // [1, 2, 3]
-  			.reduce((a, b) -> {
-  			  return Integer.sum(a, b);
-  			});
+		OptionalInt reduced = IntStream.range(1, 4) // [1, 2, 3]
+  				.reduce((a, b) -> {
+  			 	 return Integer.sum(a, b);
+				  });
+		// 두 개의 인자를 받는 경우이다. 여기서 10은 초기값이고, 스트림 내 값을 더하여 결과는 16(10 + 1 + 2 + 3)이 된다. 여기서 람다는 메소드 참조(method reference)를 이용하여 넘길 수 있다.
+		int reducedTwoParams = IntStream.range(1, 4) // [1, 2, 3]
+				.reduce(10, Integer::sum); // method reference
 	}
 	
 	//��� �ִ� ��Ʈ��

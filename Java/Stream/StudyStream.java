@@ -84,6 +84,7 @@ public class StudyStream {
 				.reduce(10, Integer::sum); // method reference
 	}
 	
+	
 	//��� �ִ� ��Ʈ��
 	public Stream<String> streamOf(List<String> list) {
 		return list == null || list.isEmpty() ? Stream.empty() : list.stream();

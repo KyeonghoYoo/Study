@@ -49,8 +49,8 @@ class Solution {
 	}
 
 	public int func(int i, int j, int m, int n, int[][] puddles, int[][] memo) {
-		// 도착시 1 반환
 		if (i == n - 1 && j == m - 1) {
+			// 도착시 1 반환
 			return 1;
 		}
 		if (memo[i][j] == 0) {
@@ -70,8 +70,8 @@ class Solution {
 			if (j != m - 1) {
 				memo[i][j] += func(i, j + 1, m, n, puddles, memo) % 1000000007;
 			}
-		// 물웅덩이 0 반환
 		} else if (memo[i][j] == -1) {
+			// 물웅덩이 0 반환
 			return 0;
 		}
 		return memo[i][j] % 1000000007;

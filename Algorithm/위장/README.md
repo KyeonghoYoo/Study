@@ -9,7 +9,7 @@ Tags: level 2, 프로그래머스
 
 예를 들어 스파이가 가진 옷이 아래와 같고 오늘 스파이가 동그란 안경, 긴 코트, 파란색 티셔츠를 입었다면 다음날은 청바지를 추가로 입거나 동그란 안경 대신 검정 선글라스를 착용하거나 해야 합니다.
 
-[Untitled](https://www.notion.so/15a5dfdf3eeb47c7a362c3806fdef506)
+<table style="border-collapse: collapse; width: 100%;" border="1"><tbody><tr><td><span style="color: #333333;">종류</span></td><td><span style="color: #333333;">이름</span></td></tr><tr><td>얼굴</td><td>동그란 안경, 검정 선글라스</td></tr><tr><td>상의</td><td>파란색 티셔츠</td></tr><tr><td>하의</td><td>청바지</td></tr><tr><td>겉옷</td><td>긴 코트</td></tr></tbody></table>
 
 스파이가 가진 의상들이 담긴 2차원 배열 clothes가 주어질 때 서로 다른 옷의 조합의 수를 return 하도록 solution 함수를 작성해주세요.
 
@@ -24,7 +24,7 @@ Tags: level 2, 프로그래머스
 
 ### 입출력 예
 
-[Untitled](https://www.notion.so/aa1063078ddc4882a948b75afb0fe099)
+<table style="border-collapse: collapse; width: 100%;" border="1"><tbody><tr><td><span style="color: #333333;">clothes</span></td><td><span style="color: #333333;">return</span></td></tr><tr><td>[[yellow_hat,<span>&nbsp;</span>headgear], [blue_sunglasses,<span>&nbsp;</span>eyewear], [green_turban,<span>&nbsp;</span>headgear]]</td><td>5</td></tr><tr><td>[[crow_mask,<span>&nbsp;</span>face], [blue_sunglasses,<span>&nbsp;</span>face], [smoky_makeup,<span>&nbsp;</span>face]]</td><td>3</td></tr></tbody></table>
 
 ### 입출력 예 설명
 

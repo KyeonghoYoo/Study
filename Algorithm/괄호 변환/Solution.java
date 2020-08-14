@@ -13,13 +13,14 @@ class Solution {
 		int i = -1;
 		int cnt = 0;
 
-		String u;
-		String v;
+		String u = "";
+		String v = "";
 		// 2. 문자열 w를 "균형잡힌 괄호 문자열" 두 문자열 u, v로 분리한다.
 		do {
 			i++;
 			cnt = w.charAt(i) == '(' ? cnt + 1 : cnt - 1;
 		} while (cnt != 0);
+
 		u = w.substring(0, i + 1);
 		v = w.substring(i + 1);
 		
@@ -60,7 +61,6 @@ class Solution {
 		String result = "";
 		for (int i = 1; i < s.length() - 1; i++) {
 			result = s.charAt(i) == '(' ? result + ")" : result + "(";
-
 		}
 		return result;
 	}

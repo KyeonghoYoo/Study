@@ -49,6 +49,7 @@ class Solution {
 				return false;
 			}
 		}
+
 		if (cnt == 0) {
 			return true;
 		} else {
@@ -59,6 +60,7 @@ class Solution {
 	public String makeValid(String s) {
 		int cnt = 0;
 		String result = "";
+		// 첫 번째와 마지막 문자를 제거하기 위해 i는 1부터 s.length() -1 까지 조건을 준다.
 		for (int i = 1; i < s.length() - 1; i++) {
 			result = s.charAt(i) == '(' ? result + ")" : result + "(";
 		}

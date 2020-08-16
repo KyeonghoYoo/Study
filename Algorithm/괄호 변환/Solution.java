@@ -38,7 +38,6 @@ class Solution {
 			String temp = "(" + func(v) + ")";
 			return temp + makeValid(u) ;
 		}
-		
 	}
 
 	public boolean isValid(String s) {

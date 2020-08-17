@@ -40,6 +40,7 @@ class Solution {
 		}
 	}
 
+	// 문자열이 올바른 괄호 문자열인지 검사하는 함수
 	public boolean isValid(String s) {
 		int cnt = 0;
 		for (int i = 0; i < s.length(); i++) {
@@ -56,6 +57,7 @@ class Solution {
 		}
 	}
 
+	// input의 첫 번째와 마지막 문자를 제거하고 나머지 문자열의 괄호 방향을 뒤집어서 반환하는 함수
 	public String makeValid(String s) {
 		int cnt = 0;
 		String result = "";

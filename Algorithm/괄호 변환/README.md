@@ -91,13 +91,14 @@ class Solution {
 		int i = -1;
 		int cnt = 0;
 
-		String u;
-		String v;
+		String u = "";
+		String v = "";
 		// 2. 문자열 w를 "균형잡힌 괄호 문자열" 두 문자열 u, v로 분리한다.
 		do {
 			i++;
 			cnt = w.charAt(i) == '(' ? cnt + 1 : cnt - 1;
 		} while (cnt != 0);
+
 		u = w.substring(0, i + 1);
 		v = w.substring(i + 1);
 		
@@ -115,9 +116,9 @@ class Solution {
 			String temp = "(" + func(v) + ")";
 			return temp + makeValid(u) ;
 		}
-		
 	}
 
+	// 문자열이 올바른 괄호 문자열인지 검사하는 함수
 	public boolean isValid(String s) {
 		int cnt = 0;
 		for (int i = 0; i < s.length(); i++) {
@@ -126,6 +127,7 @@ class Solution {
 				return false;
 			}
 		}
+
 		if (cnt == 0) {
 			return true;
 		} else {
@@ -133,12 +135,13 @@ class Solution {
 		}
 	}
 
+	// input의 첫 번째와 마지막 문자를 제거하고 나머지 문자열의 괄호 방향을 뒤집어서 반환하는 함수
 	public String makeValid(String s) {
 		int cnt = 0;
 		String result = "";
+		// 첫 번째와 마지막 문자를 제거하기 위해 i는 1부터 s.length() -1 까지 조건을 준다.
 		for (int i = 1; i < s.length() - 1; i++) {
 			result = s.charAt(i) == '(' ? result + ")" : result + "(";
-
 		}
 		return result;
 	}

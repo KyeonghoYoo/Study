@@ -1,6 +1,7 @@
 # 징검다리 건너기
 
 Created: Aug 24, 2020 8:32 PM
+Link: https://programmers.co.kr/learn/courses/30/lessons/64062
 
 ### **문제 설명**
 

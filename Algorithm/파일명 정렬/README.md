@@ -72,7 +72,6 @@ class Solution {
     public String[] solution(String[] files) {
 	String[] answer = new String[files.length];
 		answer = Arrays.stream(files).sorted((o1, o2) -> {
-			// 1. HEAD 부분을 기준으로 사전 순으로 정렬한다.
 			// 대소문자 구분을 하지 않기 위한 toLowerCase() 처리
 			o1 = o1.toLowerCase();
 			o2 = o2.toLowerCase();

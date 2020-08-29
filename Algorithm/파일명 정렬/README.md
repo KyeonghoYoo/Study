@@ -77,10 +77,10 @@ class Solution {
 			o2 = o2.toLowerCase();
 			char[] o1CharArr = o1.toCharArray();
 			char[] o2CharArr = o2.toCharArray();
-			
+			// HEAD를 담기위한 변수
 			String o1HEAD = "";
 			String o2HEAD = "";
-			
+			// NUMBER을 담기 위한 변수
 			String o1NUMBER = "";
 			String o2NUMBER = "";
 			

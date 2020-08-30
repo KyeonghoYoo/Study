@@ -4,7 +4,7 @@ import java.util.List;
 class Solution {
 	public int solution(String str1, String str2) {
 		int answer = 0;
-		// 자카드 유사도를 담기 위한 변수
+		// 자카드 유사도를 담기 위한 double형 변수
 		double jaccardSimilarity = 0;
 		// 교집합을 담기 위한 List
 		List<String> intersectionList = new ArrayList<String>();

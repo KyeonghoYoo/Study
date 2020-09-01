@@ -61,9 +61,7 @@ class Solution {
 							pillarMap.replace(pos, 0);
 						}
 					}
-
 				}
-
 			} else {
 				// 보라면 x좌표가 n - 1보다 클 때, 혹은 y가 0이면 다음 요소로 넘긴다.
 				if (x > n - 1 || y == 0)
@@ -98,7 +96,7 @@ class Solution {
 			}
 		}
 
-		// 정답 추출 처리
+		// 최종적으로 추출된 기둥과 보를 List에 담는 처리
 		for (String key : pillarMap.keySet()) {
 			String[] pos = key.split(",");
 			int[] answerArray = { Integer.parseInt(pos[0]), Integer.parseInt(pos[1]), pillarMap.get(key) };
@@ -111,7 +109,7 @@ class Solution {
 			answerList.add(answerArray);
 		}
 
-		// 정렬 처리 후, Array로 변환하여 answer에 담아 반환한다.
+		// List를 Stream으로 변환하여 정렬 처리 후, Array로 변환하여 answer에 담아 반환한다.
 		answer = answerList.stream().sorted((o1, o2) -> {
 			if (o1[0] != o2[0]) {
 				// x좌표 오름차순 정렬 처리

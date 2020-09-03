@@ -13,7 +13,6 @@ class Solution {
 			String action = extractedElement[0];
 			String userId = extractedElement[1];
 			
-
 			if (action.equals("Enter")) {
 				String nickname = extractedElement[2];
 				// 유저가 채팅방에 들어온 경우, logs에 해당 userId가 들어왔음을 추가한다.

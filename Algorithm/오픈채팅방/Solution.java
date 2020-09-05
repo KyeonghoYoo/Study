@@ -28,6 +28,7 @@ class Solution {
 				userInfoMap.put(userId, nickname);
 			}
 		}
+		
 		// logs를 Stream으로 변환한 후, map()을 통해 logs의 요소에 userId를 userInfoMap에 저장된 nickname으로 대체하여 Array로 변환한다.
 		answer = logs.stream().map(e -> {
 			String userId = e.substring(0, e.indexOf("%"));

@@ -8,6 +8,7 @@ class Solution {
 		int answer = 0;
 		// 순서가 없고 중복을 허락하지 않는 자료구조인 Set을 활용하여 조합된 숫자를 담는다.
 		Set<Integer> combinedNumSet = new HashSet<Integer>();
+		
 		for (int i = 0; i < numbers.length(); i++) {
 			combinedNumSet.addAll(Arrays.stream(getCombinedNums(numbers.length(), "" + i).split(",")).map(e -> {
 				String result = "";

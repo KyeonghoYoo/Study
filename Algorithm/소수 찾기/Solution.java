@@ -38,6 +38,7 @@ class Solution {
 	public boolean isPrimeNum(int num) {
 		if (num <= 1)
 			return false;
+			
 		for (int i = 2; i <= Math.sqrt(num); i++) {
 			if (num % i == 0)
 				return false; // 소수가 아니라면 false 리턴

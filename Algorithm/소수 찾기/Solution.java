@@ -10,6 +10,8 @@ class Solution {
 		Set<Integer> combinedNumSet = new HashSet<Integer>();
 		
 		for (int i = 0; i < numbers.length(); i++) {
+			// getCombinedNums()로 반환된 조합된 숫자가 담긴 String을 split()로 나눠 Array로 변경 후
+			// Stream을 통해 List로 변환하여 Set에 담는다. 담는 과정에서 중복된 숫자들은 다 걸러진다.
 			combinedNumSet.addAll(Arrays.stream(getCombinedNums(numbers.length(), "" + i).split(",")).map(e -> {
 				String result = "";
 				for (char ch : e.toCharArray()) {

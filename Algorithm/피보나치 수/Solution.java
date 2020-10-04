@@ -13,6 +13,7 @@ class Solution {
         } else if(n <= 0){
             return 0;
         }
+        
         if(memo[n - 1] != 0) {
             return memo[n - 1];
         }

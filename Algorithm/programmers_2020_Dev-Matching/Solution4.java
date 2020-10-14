@@ -3,6 +3,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+// 데브매칭 4번 문제 풀이
 public class Solution4 {
 	public static void main(String[] args) throws ParseException {
 		String[] votes = { "AVANT", "PRIDO", "SONATE", "RAIN", "MONSTER", "GRAND", "SONATE", "AVANT", "SONATE", "RAIN",

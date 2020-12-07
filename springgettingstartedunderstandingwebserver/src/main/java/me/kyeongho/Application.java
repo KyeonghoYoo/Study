@@ -1,20 +1,11 @@
 package me.kyeongho;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.catalina.Context;
-import org.apache.catalina.LifecycleException;
-import org.apache.catalina.startup.Tomcat;
-
+@SpringBootApplication
 public class Application {
-
+	/*
 	public static void main(String[] args) throws LifecycleException {
 		Tomcat tomcat = new Tomcat();
 		tomcat.setPort(8080);
@@ -41,7 +32,9 @@ public class Application {
 		
 		tomcat.start();
 		tomcat.getServer().await();
-		
 	}
-
+	*/
+	public static void main(String[] args) {
+		SpringApplication.run(Application.class, args);
+	}
 }

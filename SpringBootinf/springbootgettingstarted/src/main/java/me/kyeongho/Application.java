@@ -19,11 +19,11 @@ public class Application {
     /* SpringBootApplication은 ComponentScan 후 ConfigurationPropertiesScan을 하기 때문에
      * 개발자가 등록한 Bean이 ConfigurationPropertiesScan에 의해 덮어질 수가 있다.
      */
-    @Bean
-    public HoloMan holoMan() {
-    	HoloMan holoMan = new HoloMan();
-    	holoMan.setName("ykh");
-    	holoMan.setHowLong(60);
-    	return holoMan;
-    }
+//    @Bean
+//    public HoloMan holoMan() {
+//    	HoloMan holoMan = new HoloMan();
+//    	holoMan.setName("ykh");
+//    	holoMan.setHowLong(60);
+//    	return holoMan;
+//    }
 }

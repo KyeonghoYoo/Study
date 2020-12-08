@@ -19,5 +19,6 @@ public class SampleApplicationRunner implements ApplicationRunner{
 		
 		System.out.println("name: " + kyeonghoProperties.getName());
 		System.out.println("age: " + kyeonghoProperties.getAge());
+		System.out.println("sessionTimeout: " + kyeonghoProperties.getSessionTimeout());
 	}
 }

@@ -1,7 +1,12 @@
 package me.kyeongho;
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.convert.DurationUnit;
 import org.springframework.stereotype.Component;
+
 
 @Component
 @ConfigurationProperties("kyeongho")
@@ -13,6 +18,9 @@ public class KyeonghoProperties {
 	
 	private String fullName;
 
+	@DurationUnit(ChronoUnit.SECONDS)
+	private Duration sessionTimeout = Duration.ofSeconds(30);
+	
 	public String getName() {
 		return name;
 	}
@@ -37,8 +45,11 @@ public class KyeonghoProperties {
 		this.fullName = fullName;
 	}
 
-	@Override
-	public String toString() {
-		return "KyeonghoProperties [name=" + name + ", age=" + age + ", fullName=" + fullName + "]";
+	public Duration getSessionTimeout() {
+		return sessionTimeout;
+	}
+
+	public void setSessionTimeout(Duration sessionTimeout) {
+		this.sessionTimeout = sessionTimeout;
 	}
 }

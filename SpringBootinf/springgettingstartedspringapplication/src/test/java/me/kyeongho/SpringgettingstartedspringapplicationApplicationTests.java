@@ -11,7 +11,8 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@TestPropertySource(properties = "kyeongho.name = Kyeongho Yoo3")
+//@TestPropertySource(properties = "kyeongho.name = Kyeongho Yoo3")
+@TestPropertySource(locations = "classpath:test.properties")
 @SpringBootTest
 public class SpringgettingstartedspringapplicationApplicationTests {
 
@@ -21,7 +22,7 @@ public class SpringgettingstartedspringapplicationApplicationTests {
 	@Test
 	public void contextLoads() {
 		assertThat(envrioment.getProperty("kyeongho.name"))
-		.isEqualTo("Kyeongho Yoo3");
+		.isEqualTo("Kyeongho4");
 	}
 
 }

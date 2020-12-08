@@ -12,6 +12,10 @@ public class SampleApplicationRunner implements ApplicationRunner{
 	@Autowired
 	KyeonghoProperties kyeonghoProperties;
 	
+	@Autowired
+	private String hello;
+	
+	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		System.out.println("foo: " + args.containsOption("foo"));
@@ -19,6 +23,9 @@ public class SampleApplicationRunner implements ApplicationRunner{
 		
 		System.out.println("name: " + kyeonghoProperties.getName());
 		System.out.println("age: " + kyeonghoProperties.getAge());
+		System.out.println("fullName: " + kyeonghoProperties.getFullName());
 		System.out.println("sessionTimeout: " + kyeonghoProperties.getSessionTimeout());
+		
+		System.out.println(hello);
 	}
 }

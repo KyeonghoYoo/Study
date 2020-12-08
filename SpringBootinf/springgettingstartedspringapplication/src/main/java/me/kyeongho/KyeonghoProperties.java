@@ -6,10 +6,12 @@ import java.time.temporal.ChronoUnit;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.convert.DurationUnit;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
 
 
 @Component
 @ConfigurationProperties("kyeongho")
+@Validated
 public class KyeonghoProperties {
 
 	private String name;

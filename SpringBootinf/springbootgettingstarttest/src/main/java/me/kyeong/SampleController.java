@@ -12,6 +12,6 @@ public class SampleController {
 	
 	@GetMapping("/hello")
 	public String hello() {
-		return sampleService.getName();
+		return "hello " + sampleService.getName();
 	}
 }

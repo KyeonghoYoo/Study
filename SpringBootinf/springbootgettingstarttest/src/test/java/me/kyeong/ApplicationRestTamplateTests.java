@@ -1,6 +1,7 @@
 package me.kyeong;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,7 +23,9 @@ public class ApplicationRestTamplateTests {
 	
 	@Test
 	public void test() throws Exception {
+		when(mockSampleService.getName()).thenReturn("ykh");
+		
 		String result = testRestTemplate.getForObject("/hello", String.class);
-		assertThat(result).isEqualTo("hello Kyeongho");
+		assertThat(result).isEqualTo("hello ykh");
 	}
 }

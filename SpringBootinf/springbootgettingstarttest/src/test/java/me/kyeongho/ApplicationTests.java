@@ -1,4 +1,4 @@
-package me.kyeong;
+package me.kyeongho;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -16,13 +16,13 @@ import org.springframework.test.web.servlet.MockMvc;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureMockMvc
-class ApplicationTests {
+public class ApplicationTests {
 	
 	@Autowired
 	MockMvc mockMvc;
 	
 	@Test
-	void contextLoads() throws Exception {
+	public void contextLoads() throws Exception {
 		mockMvc.perform(get("/hello"))
 		.andExpect(status().isOk())
 		.andExpect(content().string("hello Kyeongho"))

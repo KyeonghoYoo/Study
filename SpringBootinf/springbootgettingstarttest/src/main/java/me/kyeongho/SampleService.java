@@ -1,4 +1,4 @@
-package me.kyeong;
+package me.kyeongho;
 
 import org.springframework.stereotype.Service;
 

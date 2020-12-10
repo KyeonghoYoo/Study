@@ -1,0 +1,4 @@
+===================================
+Kyeongho`s SpringBoot ${spring-boot.version}
+${application.version}
+===================================

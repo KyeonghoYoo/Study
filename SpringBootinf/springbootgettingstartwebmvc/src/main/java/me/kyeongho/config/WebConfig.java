@@ -9,12 +9,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
 	
 	// 아래와 같은 방법으로 정적 리소스 위치를 추가할 수 있음.
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/m/**")
-				.addResourceLocations("classpath:/m/")
-				.setCachePeriod(20); // 캐싱 전략을 따로 주입해줘야함.
-	}
+//	@Override
+//	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//		registry.addResourceHandler("/m/**")
+//				.addResourceLocations("classpath:/m/")
+//				.setCachePeriod(20); // 캐싱 전략을 따로 주입해줘야함.
+//	}
 
 	
 }

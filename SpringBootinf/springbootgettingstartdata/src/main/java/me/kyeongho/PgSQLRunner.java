@@ -5,15 +5,20 @@ import java.sql.Statement;
 
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-// @Component
-public class H2Runner implements ApplicationRunner {
+@Component
+public class PgSQLRunner implements ApplicationRunner {
 	
+	
+	private static final Logger log = LoggerFactory.getLogger(PgSQLRunner.class);
+
 	@Autowired
 	DataSource dataSource;
 
@@ -23,16 +28,17 @@ public class H2Runner implements ApplicationRunner {
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		try (Connection connection = dataSource.getConnection()) {
-			System.out.println(connection.getMetaData().getURL());
-			System.out.println(connection.getMetaData().getUserName());
-			
+			log.info(connection.getMetaData().getURL());
+			log.info(connection.getMetaData().getUserName());
+			log.info(connection.getMetaData().getDriverName());
 			Statement statement = connection.createStatement();
-			String sql = "CREATE TABLE USER(ID INTEGER NOT NULL, name VARCHAR(255), PRIMARY KEY (id))";
-			System.out.println("Update문 실행");
+			
+			String sql = "CREATE TABLE USERS(ID INTEGER NOT NULL, name VARCHAR(255), PRIMARY KEY (id))";
+			log.info("PgSQL Update문 실행");
 			statement.executeUpdate(sql);
 		}
-		System.out.println("INSERT문 실행");
-		jdbcTemplate.execute("INSERT INTO USER VALUES (1, 'Kyeongho')");
+		log.info("PgSQL INSERT문 실행");
+		jdbcTemplate.execute("INSERT INTO USERS VALUES (1, 'Kyeongho')");
 		
 	}
 

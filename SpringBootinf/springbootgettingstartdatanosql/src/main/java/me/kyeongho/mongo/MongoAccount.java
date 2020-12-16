@@ -1,11 +1,11 @@
-package me.kyeongho;
+package me.kyeongho.mongo;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.redis.core.RedisHash;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-//@RedisHash("accounts")
-public class Account {
-
+@Document(collection = "accounts")
+public class MongoAccount {
+	
 	@Id
 	private String id;
 	

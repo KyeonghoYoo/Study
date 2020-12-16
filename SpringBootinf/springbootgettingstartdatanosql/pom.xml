@@ -37,6 +37,12 @@
 		 	<groupId>org.springframework.boot</groupId>
 		 	<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		 </dependency>
+		 <!-- 테스트용 내장 몽고DB 사용을 위한 의존성 추가 -->
+		 <dependency>
+		 	<groupId>de.flapdoodle.embed</groupId>
+		 	<artifactId>de.flapdoodle.embed.mongo</artifactId>
+		 	<scope>test</scope>
+		 </dependency>
 	</dependencies>
 
 	<build>

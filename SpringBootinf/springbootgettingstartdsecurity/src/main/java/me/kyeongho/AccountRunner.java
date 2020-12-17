@@ -22,7 +22,7 @@ public class AccountRunner implements ApplicationRunner {
 	public void run(ApplicationArguments args) throws Exception {
 		Account kyeongho = accountService.createAccount("Kyeongho", "1234");
 
-		log.info("userName: " + kyeongho.getUserName() + ", password: " + kyeongho.getPassword());
+		log.info("userName: " + kyeongho.getUsername() + ", password: " + kyeongho.getPassword());
 	}
 
 }

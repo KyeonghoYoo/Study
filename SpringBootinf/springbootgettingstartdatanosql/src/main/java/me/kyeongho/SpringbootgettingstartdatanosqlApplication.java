@@ -24,7 +24,7 @@ public class SpringbootgettingstartdatanosqlApplication {
 	}
 	
 	// 람다식을 활용하여 아래와 같이 ApplicaitonRunner를 구성할 수도 있다.
-	@Bean
+//	@Bean
 	public ApplicationRunner applicationRunner() {
 		return args -> {
 //			MongoAccount account = new MongoAccount();

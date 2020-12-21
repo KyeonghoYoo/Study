@@ -42,6 +42,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<!-- JPA 하이버네이트 -->
+		<dependency>
+   			<groupId>org.hibernate</groupId>
+    		<artifactId>hibernate-entitymanager</artifactId>
+		</dependency>	
 	</dependencies>
 
 	<build>

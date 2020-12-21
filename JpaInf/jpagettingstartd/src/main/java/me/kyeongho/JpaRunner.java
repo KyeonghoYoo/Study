@@ -2,6 +2,10 @@ package me.kyeongho;
 
 import java.sql.Connection;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +22,33 @@ public class JpaRunner implements ApplicationRunner {
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		try (Connection connection = dataSource.getConnection()) {
+			// 컨넥션 테스트
 			System.out.println(connection.getMetaData().getURL());
 			System.out.println(connection.getMetaData().getUserName());
 		}
+
+		// Unit Name을 넣어서 생성 EntityManagerFactory 생성
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
+		// 한 트랜잭션에서 실행되는 작업을 시작할 때마다 EntityManager를 반드시 만들어서 사용해줘야함
+		EntityManager em = emf.createEntityManager();
+		// EntityManager로 부터 트랜잭션을 받아와 사용할 수 있다.
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		
+		try {
+			Member member = new Member();
+			member.setName("Kyeongho");
+			
+			// 저장
+			em.persist(member);
+
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+		} finally {
+			em.close();
+		}
+
+		emf.close();
 	}
 }

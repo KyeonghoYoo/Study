@@ -31,7 +31,16 @@ public class JpqlRunner implements ApplicationRunner {
 			em.persist(member);
 			em.persist(member2);
 			
-			List<Member> result = em.createQuery("select m from Memeber as m", Member.class)
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+		} finally {
+
+		}
+		
+		tx.begin();
+		try {
+			List<Member> result = em.createQuery("select m from Member as m", Member.class)
 					.getResultList();
 			
 			for (Member e: result) {

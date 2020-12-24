@@ -7,8 +7,8 @@ public enum RoleType {
     
     private final String name;
 
-    RoleType(final String message) {
-        this.name = message;
+    RoleType(final String naem) {
+        this.name = naem;
     }
 
     public String getName() {

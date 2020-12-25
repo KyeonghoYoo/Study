@@ -37,7 +37,7 @@ public class JpaRunner implements ApplicationRunner {
 		
 		try {
 			Member member = new Member();
-			member.setName("Kyeongho");
+			member.setUsername("Kyeongho");
 			
 			// 저장
 			em.persist(member);
@@ -59,10 +59,10 @@ public class JpaRunner implements ApplicationRunner {
 			// 조회
 			Member member2 = em2.find(Member.class, id);
 			System.out.println("memeber.id:" + member2.getId());
-			System.out.println("member.name: " + member2.getName());
+			System.out.println("member.name: " + member2.getUsername());
 			
 			// 수정
-			member2.setName("Hello Kyeongho");
+			member2.setUsername("Hello Kyeongho");
 			
 			//삭제
 			em2.remove(member2);

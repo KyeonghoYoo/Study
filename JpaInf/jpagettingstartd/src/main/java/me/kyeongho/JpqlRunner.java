@@ -24,9 +24,9 @@ public class JpqlRunner implements ApplicationRunner {
 		
 		try {
 			Member member = new Member();
-			member.setName("Hello");
+			member.setUsername("Hello");
 			Member member2 = new Member();
-			member2.setName("Hi");
+			member2.setUsername("Hi");
 			// 저장
 			em.persist(member);
 			em.persist(member2);
@@ -44,7 +44,7 @@ public class JpqlRunner implements ApplicationRunner {
 					.getResultList();
 			
 			for (Member e: result) {
-				System.out.println("memeber.name: " + e.getName());
+				System.out.println("memeber.name: " + e.getUsername());
 			}
 			
 			tx.commit();

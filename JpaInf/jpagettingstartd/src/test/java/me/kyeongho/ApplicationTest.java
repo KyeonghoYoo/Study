@@ -28,7 +28,7 @@ public class ApplicationTest {
 		tx.begin();
 
 		Member member = new Member();
-		member.setName("Kyeongho");
+		member.setUsername("Kyeongho");
 
 		// 저장
 		em.persist(member);
@@ -60,9 +60,9 @@ public class ApplicationTest {
 		tx.begin();
 
 		Member member1 = new Member();
-		member1.setName("Kyeongho1");
+		member1.setUsername("Kyeongho1");
 		Member member2 = new Member();
-		member2.setName("Kyeongho2");
+		member2.setUsername("Kyeongho2");
 
 		// 저장
 		em.persist(member1);
@@ -86,7 +86,7 @@ public class ApplicationTest {
 		tx.begin();
 
 		Member member1 = new Member();
-		member1.setName("Kyeongho");
+		member1.setUsername("Kyeongho");
 		
 		em.persist(member1);
 		
@@ -96,7 +96,7 @@ public class ApplicationTest {
 		
 		Member member2 = em.find(Member.class, 1L);
 		
-		member2.setName("ModifiedKyeongho");
+		member2.setUsername("ModifiedKyeongho");
 		System.out.println("-------");
 
 		tx.commit();

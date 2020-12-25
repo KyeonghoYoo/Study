@@ -24,7 +24,7 @@ public class DetachedTest {
 		tx.begin();
 		// 회원 엔티티 생성, 비영속(new/transient) 상태
 		Member member = new Member();
-		member.setName("Kyeongho");
+		member.setUsername("Kyeongho");
 
 		// 회원 엔티티 영속(managed) 상태
 		em.persist(member);
@@ -48,7 +48,7 @@ public class DetachedTest {
 		tx.begin();
 
 		Member member1 = new Member();
-		member1.setName("Kyeongho");
+		member1.setUsername("Kyeongho");
 
 		// 새 엔티티 디비에 저장
 		em.persist(member1);
@@ -60,7 +60,7 @@ public class DetachedTest {
 		em.clear(); // 영속성 컨텍스트 초기화
 		
 		// 준영속 상태
-		member2.setName("ModifiedName");
+		member2.setUsername("ModifiedName");
 		
 		tx.commit();
 
@@ -77,7 +77,7 @@ public class DetachedTest {
 		tx.begin();
 		// 비영속 상태
 		Member member1 = new Member();
-		member1.setName("Kyeongho");
+		member1.setUsername("Kyeongho");
 		
 		// 영속 상태
 		em.persist(member1);

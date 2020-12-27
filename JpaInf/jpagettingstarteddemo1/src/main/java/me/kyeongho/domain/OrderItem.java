@@ -11,18 +11,18 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "ORDER_ITEM")
+@Table(name = "order_item")
 @Getter @Setter
 public class OrderItem {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ORDER_ITEM_ID")
+	@Column(name = "order_item_id")
 	private Long id;
 	
-	@Column(name = "ORDER_ID")
+	@Column(name = "order_id")
 	private Long orderId;
 	
-	@Column(name = "ITEM_ID")
+	@Column(name = "item_id")
 	private Long itemId;
 	
 	private int orderprice;

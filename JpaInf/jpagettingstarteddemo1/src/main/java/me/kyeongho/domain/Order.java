@@ -15,15 +15,15 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "ORDERS")
+@Table(name = "orders")
 @Getter @Setter
 public class Order {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ORDER_ID")
+	@Column(name = "order_id")
 	private Long id;
 	
-	@Column(name = "MEMBER_ID")
+	@Column(name = "member_id")
 	private Long memberId;
 	
 	@Column(name = "order_date")

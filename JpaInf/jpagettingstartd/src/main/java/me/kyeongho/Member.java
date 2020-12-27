@@ -9,7 +9,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,6 +21,7 @@ import javax.persistence.TemporalType;
 public class Member {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "member_id")
 	private Long id;
 	
 	@Column(name = "name")
@@ -35,7 +38,11 @@ public class Member {
 	
 	@Lob
 	private String description;
-
+	
+	@ManyToOne
+	@JoinColumn(name = "team_id")
+	private Team team;
+	
 	public Long getId() {
 		return id;
 	}
@@ -83,5 +90,12 @@ public class Member {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	public Team getTeam() {
+		return team;
+	}
 
+	public void setTeam(Team team) {
+		this.team = team;
+	}
 }

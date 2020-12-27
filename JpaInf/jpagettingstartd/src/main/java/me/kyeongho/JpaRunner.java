@@ -36,10 +36,19 @@ public class JpaRunner implements ApplicationRunner {
 		tx.begin();
 		
 		try {
+			// 팀 저장
+			Team team = new Team();
+			team.setName("TeamA");
+			
+			em.persist(team);
+			
+			// 멤버 저장
 			Member member = new Member();
 			member.setUsername("Kyeongho");
 			
-			// 저장
+			// 단방향 연관곤계 설정, 참조 저장
+			member.setTeam(team);
+			
 			em.persist(member);
 			
 			id = member.getId();

@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -40,6 +41,10 @@ public class Order {
 	
 	@OneToMany(mappedBy = "order")
 	private List<OrderItem> orderItems = new ArrayList<>();
+	
+	@OneToOne
+	@JoinColumn(name = "delivery_id")
+	private Delivery delivery;
 	
 	// 양방향 연관관계를 세팅해주는 연관관계 편의 메소드
 	public void addOrderItem(OrderItem orderItem) {

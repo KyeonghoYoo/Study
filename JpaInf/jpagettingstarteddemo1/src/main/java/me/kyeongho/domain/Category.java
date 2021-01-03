@@ -17,7 +17,7 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter
-public class Category {
+public class Category extends BaseEntity {
 
 	@Id @GeneratedValue
 	private Long id;

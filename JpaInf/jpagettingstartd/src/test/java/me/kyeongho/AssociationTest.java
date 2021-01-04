@@ -42,6 +42,7 @@ public class AssociationTest {
 		tx.commit();
 		
 		em.close();
+		emf.close();
 	}
 
 
@@ -79,5 +80,6 @@ public class AssociationTest {
 		tx.commit();
 
 		em.close();
+		emf.close();
 	}
 }

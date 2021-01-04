@@ -17,7 +17,7 @@ public class ProxyTest {
 
 	@Test
 	@Order(1)
-	public void deteachedTest() {
+	public void proxyBasicTest() {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
@@ -37,7 +37,8 @@ public class ProxyTest {
 		em.clear();
 
 		Member refMember = em.getReference(Member.class, member.getId());
-		
+		// 강제 초기화
+		// Hibernate.initialize(refMember);
 		System.out.println("refMember = " + refMember.getClass().getName());
 		
 		System.out.println("refMember.getUsername() = " + refMember.getUsername());

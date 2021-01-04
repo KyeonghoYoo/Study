@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,9 +37,9 @@ public abstract class Item extends BaseEntity {
 	@Column(name = "stock_quantity")
 	private int stockQuantity;
 	
-	@OneToMany(mappedBy = "item")
+	@OneToMany(mappedBy = "item", fetch = FetchType.LAZY)
 	private List<OrderItem> orderItem = new ArrayList<>();
 	
-	@ManyToMany(mappedBy = "items")
+	@ManyToMany(mappedBy = "items", fetch = FetchType.LAZY)
 	private List<Category> categories = new ArrayList<>();
 }

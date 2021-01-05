@@ -1,5 +1,7 @@
 package me.kyeongho;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -36,12 +38,22 @@ public class ValueTypeTest {
 		
 		em.flush();
 		em.clear();
-
-		Member refMember = em.getReference(Member.class, member.getId());
-
-		System.out.println("refMember = " + refMember.getClass().getName());
 		
-		System.out.println("refMember.getUsername() = " + refMember.getUsername());
+		System.out.println("========== Start ==========");
+		Member refMember = em.getReference(Member.class, member.getId());
+		
+		List<Address> addressHistory = refMember.getAddressHistory();
+		
+		refMember.getAddressHistory().remove(new Address("city2", "street2", "zipcode2"));
+		refMember.getAddressHistory().add(new Address("newCity2", "newStreet2", "newZipcode2"));
+		
+		for (Address address : addressHistory) {
+			System.out.println("address = " + address.getCity() + " " + address.getStreet() + " " + address.getZipcode());
+		}
+		
+		// 불변 객체로 구현이 돼있기 때문에 아예 새로 만들어서 갈아 끼운다.
+		refMember.setAddress(new Address("newCity", refMember.getAddress().getStreet(), refMember.getAddress().getZipcode()));
+
 		
 		
 		tx.commit();

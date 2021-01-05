@@ -1,5 +1,7 @@
 package me.kyeongho;
 
+import java.util.Objects;
+
 import javax.persistence.Embeddable;
 
 @Embeddable
@@ -31,6 +33,23 @@ public class Address {
 
 	public String getZipcode() {
 		return zipcode;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(city, street, zipcode);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		else {
+			Address address = (Address) obj;
+			return Objects.equals(city, address.city) 
+					&& Objects.equals(street, address.street)
+					&& Objects.equals(zipcode, address.zipcode);
+		}
 	}
 
 }

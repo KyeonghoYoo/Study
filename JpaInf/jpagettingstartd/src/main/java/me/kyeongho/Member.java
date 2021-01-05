@@ -1,8 +1,13 @@
 package me.kyeongho;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -40,12 +45,37 @@ public class Member {
 	@Lob
 	private String description;
 	
+	@Embedded
+	private Address address;
+	
+	@ElementCollection
+	@CollectionTable(name = "address",
+				joinColumns = @JoinColumn(name = "member_id")
+			)
+	private List<Address> addressHistory = new ArrayList<>();
+	
 	@ManyToOne(fetch = FetchType.LAZY) // LAZY를 이용해 프록시로 조회
 	@JoinColumn(name = "team_id")
 	private Team team;
 	
 	public Long getId() {
 		return id;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public List<Address> getAddressHistory() {
+		return addressHistory;
+	}
+
+	public void setAddressHistory(List<Address> addressHistory) {
+		this.addressHistory = addressHistory;
 	}
 
 	public void setId(Long id) {

@@ -11,7 +11,9 @@ import lombok.EqualsAndHashCode;
 public class Address {
 
 	private String city;
+	
 	private String street;
+	
 	private String zipcode;
 	
 	public Address() {
@@ -22,6 +24,10 @@ public class Address {
 		this.city = city;
 		this.street = street;
 		this.zipcode = zipcode;
+	}
+	
+	public String fullAddress() {
+		return getCity() + " " + getStreet() + " " + getZipcode();
 	}
 	
 	public String getCity() {

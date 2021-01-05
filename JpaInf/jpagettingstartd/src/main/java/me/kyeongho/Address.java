@@ -37,7 +37,7 @@ public class Address {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(city, street, zipcode);
+		return Objects.hash(getCity(), getStreet(), getZipcode());
 	}
 
 	@Override
@@ -46,9 +46,9 @@ public class Address {
 			return true;
 		else {
 			Address address = (Address) obj;
-			return Objects.equals(city, address.city) 
-					&& Objects.equals(street, address.street)
-					&& Objects.equals(zipcode, address.zipcode);
+			return Objects.equals(getCity(), address.getCity()) 
+					&& Objects.equals(getStreet(), address.getStreet())
+					&& Objects.equals(getZipcode(), address.getZipcode());
 		}
 	}
 

@@ -6,12 +6,12 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
 
 import me.kyeongho.domain.Member;
 import me.kyeongho.domain.valuetype.Address;
 
-@DataJpaTest
+@DataJdbcTest
 public class ValueTypeTest {
 	
 	@Test

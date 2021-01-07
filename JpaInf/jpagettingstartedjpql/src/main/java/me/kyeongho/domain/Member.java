@@ -34,5 +34,24 @@ public class Member {
 
 	@OneToMany(mappedBy = "member")
 	List<Order> orders = new ArrayList<>();
+	
+	public Member() {
+	}
+
+	public Member(Long id, String name, int age, Team team, List<Order> orders) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.age = age;
+		this.team = team;
+		this.orders = orders;
+	}
+
+	@Override
+	public String toString() {
+		return "Member [id=" + id + ", name=" + name + ", age=" + age + "]";
+	}
+	
+	
 
 }

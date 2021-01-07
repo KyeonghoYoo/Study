@@ -25,4 +25,19 @@ public class Team {
 	@OneToMany(mappedBy = "team")
 	private List<Member> members = new ArrayList<>();
 	
+	public Team() {
+	}
+
+	public Team(Long id, String name, List<Member> members) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.members = members;
+	}
+
+	@Override
+	public String toString() {
+		return "Team [id=" + id + ", name=" + name + "]";
+	}
+	
 }

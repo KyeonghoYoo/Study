@@ -34,4 +34,21 @@ public class Order {
 	@JoinColumn(name = "product_id")
 	private Product product;
 	
+	public Order() {
+	}
+
+	public Order(Long id, int orderAmount, Address address, Member member, Product product) {
+		super();
+		this.id = id;
+		this.orderAmount = orderAmount;
+		this.address = address;
+		this.member = member;
+		this.product = product;
+	}
+
+	@Override
+	public String toString() {
+		return "Order [id=" + id + ", orderAmount=" + orderAmount + ", address=" + address + "]";
+	}
+	
 }

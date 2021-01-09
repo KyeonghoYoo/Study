@@ -101,7 +101,7 @@ public class FetchJoinTest {
 			
 			List<Team> results = em.createQuery(query, Team.class)
 					.getResultList();
-			
+			 
 			
 			for (Team e : results) {
 				System.out.print("team = " + e.getName() + "(" + e.hashCode() + ")");

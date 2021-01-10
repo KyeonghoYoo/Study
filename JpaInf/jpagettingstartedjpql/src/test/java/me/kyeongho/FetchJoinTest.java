@@ -76,8 +76,8 @@ public class FetchJoinTest {
 		
 		try {
 			tx.begin();
-			Team teamA = Team.builder().name("teamA").build();
-			Team teamB = Team.builder().name("teamB").build();
+			Team teamA = Team.builder().name("팀A").build();
+			Team teamB = Team.builder().name("팀B").build();
 			
 			em.persist(teamA);
 			em.persist(teamB);
@@ -97,7 +97,7 @@ public class FetchJoinTest {
 			em.flush();
 			em.clear();
 		
-			String query = "select t from Team as t join fetch t.members";
+			String query = "select distinct t from Team as t join fetch t.members where t.name = '팀A'";
 			
 			List<Team> results = em.createQuery(query, Team.class)
 					.getResultList();

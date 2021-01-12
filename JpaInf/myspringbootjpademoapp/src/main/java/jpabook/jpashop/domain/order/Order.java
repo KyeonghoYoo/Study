@@ -3,6 +3,7 @@ package jpabook.jpashop.domain.order;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.IntBinaryOperator;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,15 +20,19 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import jpabook.jpashop.domain.delivery.Delivery;
+import jpabook.jpashop.domain.delivery.DeliveryStatus;
 import jpabook.jpashop.domain.member.Member;
 import jpabook.jpashop.domain.orderitem.OrderItem;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "orders")
 @Getter
 @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED) // 생성 메소드만 사용하여 생성하도록
 public class Order {
 
 	@Id
@@ -51,19 +56,59 @@ public class Order {
 	@Enumerated(EnumType.STRING)
 	private OrderStatus status;
 	
+	
 	// 연관관계 편의 메소드
 	public void setMember(Member member) {
 		this.member = member;
 		member.getOrders().add(this);
 	}
-	
+
 	public void addOrderItem(OrderItem orderItem) {
 		this.orderItems.add(orderItem);
 		orderItem.setOrder(this);
 	}
-	
+
 	public void setDelivery(Delivery delivery) {
 		this.delivery = delivery;
 		delivery.setOrder(this);
+	}
+	
+	// === 주문 생성 메서드 === //
+	public static Order createOrder(Member member, Delivery delivery, OrderItem... orderItems) {
+		Order order = new Order();
+		order.setMember(member);
+		order.setDelivery(delivery);
+		for(OrderItem orderItem : orderItems) {
+			order.addOrderItem(orderItem);
+		}
+		order.setStatus(OrderStatus.ORDER);
+		order.setOrderDate(LocalDateTime.now());
+		return order;
+	}
+	
+	// === 비즈니스 로직 === //
+	/**
+	 * 주문 취소
+	 */
+	public void cancel() {
+		if(delivery.getStatus() == DeliveryStatus.COMP) {
+			throw new IllegalStateException("이미 배송완료된 상품은 취소가 불가능합니다.");
+		}
+		
+		this.setStatus(OrderStatus.CANCEL);
+		for(OrderItem orderItem : this.orderItems) {
+			orderItem.cancel();
+		}
+	}
+	
+	// === 조회 로직 === //
+	/**
+	 * 전체 주문 가격 조회
+	 * @return
+	 */
+	public int getTotalPrice() {
+		return this.orderItems.stream()
+				.mapToInt(OrderItem::getTotalPrice)
+				.sum();
 	}
 }

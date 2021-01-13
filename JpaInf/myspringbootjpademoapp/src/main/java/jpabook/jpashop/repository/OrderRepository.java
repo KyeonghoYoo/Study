@@ -54,7 +54,7 @@ public class OrderRepository {
 			} else {
 				jpql += " and";
 			}
-			jpql += " m.name like :name";
+			jpql += " m.username like :name";
 		}
 		TypedQuery<Order> query = em.createQuery(jpql, Order.class).setMaxResults(1000); // 최대 1000건
 		if (orderSearch.getOrderStatus() != null) {

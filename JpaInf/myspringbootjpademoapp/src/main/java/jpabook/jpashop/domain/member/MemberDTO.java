@@ -1,19 +1,18 @@
 package jpabook.jpashop.domain.member;
 
-import javax.persistence.Embedded;
-
 import jpabook.jpashop.domain.valtype.Address;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
-@Data 
+@Data
+@AllArgsConstructor
 @Builder
 public class MemberDTO {
 
 	private Long id;
 
-	private String username;
+	private String name;
 
-	@Embedded
 	private Address address;
 }

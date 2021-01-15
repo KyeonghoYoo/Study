@@ -43,6 +43,12 @@ public class MemberService {
 	public Member findOne(Long memberId) {
 		return memberRepository.find(memberId);
 	}
+	
+	// 회원 수정
+	public void update(Long id, String name) {
+		Member member = memberRepository.find(id);
+		member.setUsername(name);
+	}
 
 	private void validateDuplicatieMember(Member member) {
 		// Exception

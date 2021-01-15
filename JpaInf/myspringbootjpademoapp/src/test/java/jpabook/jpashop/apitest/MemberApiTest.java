@@ -107,7 +107,7 @@ public class MemberApiTest {
 					.map(
 						e -> MemberDTO.builder()
 						.id(e.getId())
-						.username(e.getUsername())
+						.name(e.getUsername())
 						.address(e.getAddress())
 						.build())
 					.collect(Collectors.toList());

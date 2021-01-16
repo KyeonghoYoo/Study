@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
 import jpabook.jpashop.domain.order.Order;
+import jpabook.jpashop.repository.order.simplequery.SimpleOrderQueryDto;
 import lombok.RequiredArgsConstructor;
 
 @Repository
@@ -93,7 +94,32 @@ public class OrderRepository {
 
 		return query.getResultList();
 	}
-
+	
+	/**
+	 * Fetch 조인으로 조회 성능 최적화
+	 */
+	public List<Order> findAllWithMemberDelivery() {
+		List<Order> resultList = em.createQuery("select o from Order o" + 
+						" join fetch o.member m" +
+						" join fetch o.delivery d", Order.class)
+					.getResultList();
+		return resultList;
+	}
+	
+	/**
+	 * DTO 클래스를 JPQL 쿼리 시 사용하여 Join 쿼리를 짬.
+	 * 쿼리가 간결해지지만 직접 SQL을 짜듯이 사용하는 것이기 때문에 재사용성이 떨어진다.
+	 * 장점은 v3보다는 성능 최적화가 된다.
+	 */
+	public List<SimpleOrderQueryDto> findOrderDtos() {
+		List<SimpleOrderQueryDto> resultList = em.createQuery("select new jpabook.jpashop.repository.order.simplequery.SimpleOrderQueryDto(o.id, m.username, o.orderDate, o.status, d.address)" + 
+														" from Order o" + 
+														" join o.member m" + 
+														" join o.delivery d", SimpleOrderQueryDto.class)
+													.getResultList();
+		return resultList;
+	}
+	
 	/**
 	 * JPA QueryDSL
 	 */

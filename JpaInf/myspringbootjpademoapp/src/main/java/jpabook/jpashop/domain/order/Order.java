@@ -3,7 +3,6 @@ package jpabook.jpashop.domain.order;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.IntBinaryOperator;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.BatchSize;
 
 import jpabook.jpashop.domain.delivery.Delivery;
 import jpabook.jpashop.domain.delivery.DeliveryStatus;

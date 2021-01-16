@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jpabook.jpashop.domain.item.Item;
 import jpabook.jpashop.domain.order.Order;
 import lombok.Getter;
@@ -28,7 +30,8 @@ public class OrderItem {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "item_id")
 	private Item item;
-
+	
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "order_id")
 	private Order order;

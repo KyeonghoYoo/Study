@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jpabook.jpashop.domain.order.Order;
 import jpabook.jpashop.domain.valtype.Address;
 import lombok.Getter;
@@ -24,7 +26,8 @@ public class Delivery {
 	@GeneratedValue
 	@Column(name = "delivery_id")
 	private Long id;
-
+	
+	@JsonIgnore
 	@OneToOne(mappedBy = "delivery", fetch = FetchType.LAZY)
 	private Order order;
 

@@ -73,7 +73,7 @@ public class OrderApiController {
 		// 1. xToOne 관계는 fetch join으로 조회한다. (DB row 수에 영향을 주지 않는 join)
 		List<Order> orders = orderRepository.findAllWithMemberDelivery(offset, limit);
 		
-		
+		// hibernate.default_batch_fetch_size나 @BatchSize 설정을 통해 IN 쿼리를 발생시켜 쿼리 성능 최적화
 		List<OrderDto> collect = orders.stream()
 			.map(OrderDto::new)
 			.collect(Collectors.toList());

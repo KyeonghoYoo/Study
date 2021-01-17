@@ -30,6 +30,7 @@ public class OrderApiController {
 	
 	private final OrderQueryRepository orderQueryRepository;
 	
+	// 엔티티를 직접 노출시키는 방법
 	@GetMapping("/api/v1/orders")
 	public List<Order> ordersV1() {
 		List<Order> all = orderRepository.findAllByString(new OrderSearch());
@@ -44,6 +45,7 @@ public class OrderApiController {
 		return all;
 	}
 	
+	// Enitity를 DTO로 변환하여 리턴하되, 연관관계 프록시 객체에 대해서는 lazy loading으로 초기화
 	@GetMapping("/api/v2/orders")
 	public Result<List<OrderDto>> ordersV2() {
 		List<Order> orders = orderRepository.findAllByString(new OrderSearch());
@@ -55,6 +57,7 @@ public class OrderApiController {
 		return new Result<List<OrderDto>>(collect.size(), collect);
 	}
 	
+	// 페치조인으로 한 번의 쿼리로 모든 데이터를 처리함. 단점은 페이징이 불가능함.
 	@GetMapping("/api/v3/orders")
 	public Result<List<OrderDto>> ordersV3() {
 		List<Order> orders = orderRepository.findAllWithItem();
@@ -66,6 +69,8 @@ public class OrderApiController {
 		return new Result<List<OrderDto>>(collect.size(), collect);
 	}
 	
+	// ToOne 관계에 대해서는 fetch 조인을하고, 컬렉션 연관관계에 대해서는 hibernate.default_batch_fetch_size 설정을 통해
+	// IN 쿼리를 날리도록하여 성능 최적화. 이렇게하면 페치조인을 사용하면서 페이징이 가능해짐.
 	@GetMapping("/api/v3.1/orders")
 	public Result<List<OrderDto>> ordersV3_page(
 			@RequestParam(value = "offset", defaultValue = "0") int offset,
@@ -82,25 +87,29 @@ public class OrderApiController {
 		return new Result<List<OrderDto>>(collect.size(), collect);
 	}
 	
+	//// 여기부터 JPQL에 DTO로 직접 조회하는 방법
+	// ToOne 관계에 대해서는 join 하여 DTO에 담고 컬렉션 값에 대해서는 lazy loading을 시키는 방법
 	@GetMapping("/api/v4/orders")
 	public Result<List<OrderQueryDto>> ordersV4() {
 		List<OrderQueryDto> orders = orderQueryRepository.findOrderQueryDtos();
 		return new Result<List<OrderQueryDto>>(orders.size(), orders);
 	}
 	
+	// 인메모리에 FK를 Collection으로 만들어 IN 쿼리를 쏘는 방법
 	@GetMapping("/api/v5/orders")
 	public Result<List<OrderQueryDto>> ordersV5() {
 		List<OrderQueryDto> orders = orderQueryRepository.findAllByDto_optimization();
 		return new Result<List<OrderQueryDto>>(orders.size(), orders);
 	}
 	
+	// DTO를 직접 사용하여 flat하게 데이터를 조회받는 방법
 	@GetMapping("/api/v6/orders")
 	public Result<List<OrderFlatDto>> ordersV6() {
 		List<OrderFlatDto> orders = orderQueryRepository.findAllByDto_flat();
 		return new Result<List<OrderFlatDto>>(orders.size(), orders);
 	}
 	
-
+	// Flat DTO로 조회한 다음 개발자가 직접 어플리케이션단 로직으로 원하는 Response로 정재하는 방법
 	@GetMapping("/api/v6.1/orders")
 	public Result<List<OrderQueryDto>> ordersV6_flat2() {
 		List<OrderQueryDto> orders = orderQueryRepository.findAllByDto_flat2();

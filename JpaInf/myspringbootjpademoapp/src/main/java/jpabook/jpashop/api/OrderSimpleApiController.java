@@ -19,7 +19,8 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 /**
- * XtoOne Order Order -> Member Order -> Delivery
+ * XtoOne 관계만 포함됨
+ * Order Order -> Member Order -> Delivery
  *
  */
 @RestController
@@ -77,7 +78,7 @@ public class OrderSimpleApiController {
 	 */
 	@GetMapping("/api/v4/simple-orders")
 	public Result<List<SimpleOrderQueryDto>> orderV4() {
-		List<SimpleOrderQueryDto> resultList = orderRepository.findOrderDtos();
+		List<SimpleOrderQueryDto> resultList = orderSimpleQueryRepository.findOrderDtos();
 		
 
 		return new Result<List<SimpleOrderQueryDto>>(resultList.size(), resultList);

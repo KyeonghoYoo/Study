@@ -52,10 +52,7 @@ public class OrderController {
 	
 	@GetMapping("/orders")
 	public String orders(@ModelAttribute("orderSearch") OrderSearch orderSearch, Model model) {
-		log.info("주문 내역 조회, orderService.findOrders() 실행 전 =======");
 		List<Order> orders = orderService.findOrders(orderSearch);
-		log.info("주문 내역 조회, orderService.findOrders() 실행 후 =======");
-		log.info("orders.get(0).getMember().getClass() = " + orders.get(0).getMember().getClass());
 		model.addAttribute("orders", orders);
 		return "orders/orderList";
 	}

@@ -1,5 +1,8 @@
 package jpabook.jpashop.repository;
 
+import static jpabook.jpashop.domain.member.QMember.member;
+import static jpabook.jpashop.domain.order.QOrder.order;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +18,13 @@ import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+
+import jpabook.jpashop.domain.member.QMember;
 import jpabook.jpashop.domain.order.Order;
+import jpabook.jpashop.domain.order.OrderStatus;
+import jpabook.jpashop.domain.order.QOrder;
 import jpabook.jpashop.repository.order.simplequery.SimpleOrderQueryDto;
 import lombok.RequiredArgsConstructor;
 
@@ -143,8 +152,34 @@ public class OrderRepository {
 	/**
 	 * JPA QueryDSL
 	 */
-//	public List<Order> findAllByQueryDSL(OrderSearch orderSearch) {
-//
-//	}
+	public List<Order> findAllByQueryDSL(OrderSearch orderSearch) {
+		JPAQueryFactory query = new JPAQueryFactory(em);
+		
+		List<Order> result = query
+				.select(order)
+				.from(order)
+				.join(order.member, member)
+				.where(statusEq(orderSearch.getOrderStatus())
+						, nameLike(orderSearch.getMemberName()))
+				.limit(1000)
+				.fetch();
+		
+		return result;
+	}
 
+	//// QueryDSL 동적 쿼리 작성 메소드
+	private BooleanExpression nameLike(String memberName) {
+		if(!StringUtils.hasText(memberName)) {
+			return null;
+		}
+		return member.username.like("%" + memberName + "%");
+	}
+	
+	private BooleanExpression statusEq(OrderStatus statusCond) {
+		if(statusCond == null) {
+			return null;
+		}
+		
+		return order.status.eq(statusCond);
+	}
 }

@@ -83,4 +83,65 @@ public class MemberJpaRepositoryTest {
 		assertThat(findMembers.get(0).getAge()).isEqualTo(20);
 	}
 	
+	@Test
+	public void namedQueryTest() {
+		Member member1 = new Member("aaa", 10);
+		Member member2 = new Member("bbb", 20);
+		
+		memberJpaRepository.save(member1);
+		memberJpaRepository.save(member2);
+		
+		List<Member> findByUsername = memberJpaRepository.findByUsername("aaa");
+		Member findMember = findByUsername.get(0);
+		
+		assertThat(findMember).isEqualTo(member1);
+	}
+	
+	@Test
+	public void paging() {
+		memberJpaRepository.save(new Member("member1", 10));
+		memberJpaRepository.save(new Member("member2", 10));
+		memberJpaRepository.save(new Member("member3", 10));
+		memberJpaRepository.save(new Member("member4", 10));
+		memberJpaRepository.save(new Member("member5", 10));
+		
+		int age = 10;
+		int offset = 0;
+		int limit = 3;
+		
+		List<Member> findByPage = memberJpaRepository.findByPage(age, offset, limit);
+		long totalCount = memberJpaRepository.totalCount(age);
+		
+		//페이지 계산 공식 적용...
+		// totalPage = totalCount / size ...
+		// 마지막 페이지 ...
+		// 최초 페이지 ..
+		
+		// then
+		assertThat(findByPage.size()).isEqualTo(3);
+		assertThat(totalCount).isEqualTo(5);
+	}
+	
+	@Test
+	public void bulkUpadate() {
+		memberJpaRepository.save(new Member("member1", 10));
+		memberJpaRepository.save(new Member("member2", 19));
+		memberJpaRepository.save(new Member("member3", 20));
+		memberJpaRepository.save(new Member("member4", 21));
+		memberJpaRepository.save(new Member("member5", 40));
+		
+		int age = 20;
+
+		int bulkAgePlus = memberJpaRepository.bulkAgePlus(age);
+
+		
+		//페이지 계산 공식 적용...
+		// totalPage = totalCount / size ...
+		// 마지막 페이지 ...
+		// 최초 페이지 ..
+		
+		// then
+		assertThat(bulkAgePlus).isEqualTo(3);
+	}
+	
 }

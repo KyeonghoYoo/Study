@@ -1,6 +1,7 @@
 package me.kyeongho.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
 
 import java.util.List;
 
@@ -9,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import lombok.extern.slf4j.Slf4j;
 import me.kyeongho.entity.Member;
 
+@Slf4j
 @SpringBootTest
 @Transactional
 public class MemberJpaRepositoryTest {
@@ -62,6 +65,22 @@ public class MemberJpaRepositoryTest {
 		long count2 = memberJpaRepository.count();
 		assertThat(count2).isEqualTo(0);
 
+	}
+	
+	@Test
+	public void findByUsernameAndAgeGreaterThan() {
+		Member member1 = new Member("aaa", 10);
+		Member member2 = new Member("aaa", 20);
+		
+		memberJpaRepository.save(member1);
+		memberJpaRepository.save(member2);
+		
+		List<Member> findMembers = memberJpaRepository.findByUsernameAndAgeGreaterThan("aaa", 15);
+		
+		findMembers.forEach(m -> log.info("member = " + m));
+		
+		assertThat(findMembers.size()).isEqualTo(1);
+		assertThat(findMembers.get(0).getAge()).isEqualTo(20);
 	}
 	
 }

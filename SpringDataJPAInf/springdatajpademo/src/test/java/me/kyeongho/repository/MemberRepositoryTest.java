@@ -46,8 +46,8 @@ public class MemberRepositoryTest {
 		// 단건 조회
 		Optional<Member> findMember1 = memberRepository.findById(member1.getId());
 		Optional<Member> findMember2 = memberRepository.findById(member2.getId());
-		assertThat(findMember1).isEqualTo(member1);
-		assertThat(findMember2).isEqualTo(member2);
+		assertThat(findMember1.get()).isEqualTo(member1);
+		assertThat(findMember2.get()).isEqualTo(member2);
 		
 		// 커밋 시점에 변경 감지(Dirty Checking)에 의한 변경이 일어난다.
 		findMember1.get().setUsername("modifedMember1");
@@ -66,6 +66,21 @@ public class MemberRepositoryTest {
 		
 		long count2 = memberRepository.count();
 		assertThat(count2).isEqualTo(0);
-
+	}
+	
+	@Test
+	public void findByUsernameAndAgeGreaterThen() {
+		Member member1 = new Member("aaa", 10);
+		Member member2 = new Member("aaa", 20);
+		
+		memberRepository.save(member1);
+		memberRepository.save(member2);
+		
+		List<Member> findMembers = memberRepository.findByUsernameAndAgeGreaterThan("aaa", 15);
+		
+		findMembers.forEach(m -> log.info("member = " + m));
+		
+		assertThat(findMembers.size()).isEqualTo(1);
+		assertThat(findMembers.get(0).getAge()).isEqualTo(20);
 	}
 }

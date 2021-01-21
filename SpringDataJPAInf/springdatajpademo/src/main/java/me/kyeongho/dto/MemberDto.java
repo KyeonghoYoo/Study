@@ -3,6 +3,7 @@ package me.kyeongho.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import me.kyeongho.entity.Member;
 
 @Data
 @AllArgsConstructor
@@ -19,6 +20,11 @@ public class MemberDto {
 		super();
 		this.id = id;
 		this.username = username;
+	}
+	
+	public MemberDto(Member member) {
+		this.id = member.getId();
+		this.username = member.getUsername();
 	}
 	
 }

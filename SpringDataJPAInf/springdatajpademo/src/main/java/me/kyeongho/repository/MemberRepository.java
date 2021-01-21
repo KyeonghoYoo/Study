@@ -20,7 +20,7 @@ import org.springframework.data.repository.query.Param;
 import me.kyeongho.dto.MemberDto;
 import me.kyeongho.entity.Member;
 
-public interface MemberRepository extends JpaRepository<Member, Long>{
+public interface MemberRepository extends JpaRepository<Member, Long>, MemberRepositoryCustom{
 	
 	public List<Member> findByUsernameAndAgeGreaterThan(String username, int age);
 	
@@ -48,7 +48,7 @@ public interface MemberRepository extends JpaRepository<Member, Long>{
 	Page<Member> findByAge(int age, Pageable pageable);
 	
 	// 카운터 쿼리 분리
-	@Query(value = "select m from Member m left join m.team t",
+	@Query(value = "select m from Member m left join m.team t where m.age >= ?1",
 			countQuery = "select count(m) from Member m")
 	Page<Member> findByAge2(int age, Pageable pageable);
 

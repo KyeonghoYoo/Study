@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,8 +17,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.sun.el.stream.Stream;
 
 import lombok.extern.slf4j.Slf4j;
 import me.kyeongho.dto.MemberDto;
@@ -318,5 +315,34 @@ public class MemberRepositoryTest {
 		
 		
 		em.flush();
+	}
+	
+	@Test
+	public void callCustom() {
+		Member member1 = new Member("member1", 10);
+		Member member2 = new Member("member2", 10);
+		
+		memberRepository.save(member1);
+		memberRepository.save(member2);
+		
+		List<Member> findMemberCustom = memberRepository.findMemberCustom();
+		
+		assertThat(findMemberCustom.size()).isEqualTo(2);
+		
+	}
+	
+	@Test
+	public void JpaEventBaseEntity() throws Exception {
+		Member newMember = new Member("memberA", 10);
+		memberRepository.save(newMember);
+		
+		Thread.sleep(1000);
+		newMember.setAge(15);
+		
+		em.flush();
+		em.clear();
+		System.out.println(newMember.getCreatedDate() + ", " + newMember.getLastModifiedDate());
+		System.out.println(newMember.getCreatedBy() + ", " + newMember.getLastModifiedBy());
+		assertThat(newMember.getCreatedDate()).isNotEqualTo(newMember.getLastModifiedDate());
 	}
 }

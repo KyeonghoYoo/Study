@@ -345,4 +345,39 @@ public class MemberRepositoryTest {
 		System.out.println(newMember.getCreatedBy() + ", " + newMember.getLastModifiedBy());
 		assertThat(newMember.getCreatedDate()).isNotEqualTo(newMember.getLastModifiedDate());
 	}
+	
+	@Test
+	public void projectionTest() {
+		Member newMember1 = new Member("memberA", 10);
+		Member newMember2 = new Member("memberB", 15);
+		
+		memberRepository.save(newMember1);
+		memberRepository.save(newMember2);
+		
+		em.flush();
+		em.clear();
+		
+		List<UsernameOnly> result = memberRepository.findProjectionByUsername("memberA");
+		result.forEach(e -> System.out.println("username = " + e.getUsername()));
+		assertThat(newMember1.getUsername()).isIn(result.stream()
+													.map(UsernameOnly::getUsername)
+													.collect(Collectors.toList()));
+	}
+	@Test
+	public void dtoProjectionTest() {
+		Member newMember1 = new Member("memberA", 10);
+		Member newMember2 = new Member("memberB", 15);
+		
+		memberRepository.save(newMember1);
+		memberRepository.save(newMember2);
+		
+		em.flush();
+		em.clear();
+		
+		List<UsernameOnlyDto> result = memberRepository.findDtoProjectionByUsername("memberA");
+		result.forEach(e -> System.out.println("username = " + e.getUsername()));
+		assertThat(newMember1.getUsername()).isIn(result.stream()
+													.map(UsernameOnlyDto::getUsername)
+													.collect(Collectors.toList()));
+	}
 }

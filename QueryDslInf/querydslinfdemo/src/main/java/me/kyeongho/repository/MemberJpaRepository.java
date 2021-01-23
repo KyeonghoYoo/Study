@@ -71,8 +71,8 @@ public class MemberJpaRepository {
 		if(StringUtils.hasText(condition.getUsername())) {
 			builder.and(member.username.eq(condition.getUsername()));
 		}
-		if(StringUtils.hasText(condition.getTeamNaem())) {
-			builder.and(team.name.eq(condition.getTeamNaem()));
+		if(StringUtils.hasText(condition.getTeamName())) {
+			builder.and(team.name.eq(condition.getTeamName()));
 		}
 		if(condition.getAgeGoe() != null) {
 			builder.and(member.age.goe(condition.getAgeGoe()));
@@ -108,7 +108,7 @@ public class MemberJpaRepository {
 				.from(member)
 				.leftJoin(member.team, team)
 				.where(usernameEq(condition.getUsername()),
-						teamNameEq(condition.getTeamNaem()),
+						teamNameEq(condition.getTeamName()),
 						ageGoe(condition.getAgeGoe()),
 						ageLoe(condition.getAgeLoe()))
 				.fetch();

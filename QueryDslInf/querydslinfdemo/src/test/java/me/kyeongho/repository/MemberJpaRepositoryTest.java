@@ -83,7 +83,7 @@ public class MemberJpaRepositoryTest {
 		MemberSearchCondition condition = new MemberSearchCondition();
 		condition.setAgeGoe(14);
 		condition.setAgeLoe(15);
-		condition.setTeamNaem("teamB");
+		condition.setTeamName("teamB");
 		
 		List<MemberTeamDto> result = memberJpaRepository.searchByBuilder(condition);
 		
@@ -109,7 +109,7 @@ public class MemberJpaRepositoryTest {
 		MemberSearchCondition condition = new MemberSearchCondition();
 		condition.setAgeGoe(14);
 		condition.setAgeLoe(15);
-		condition.setTeamNaem("teamB");
+		condition.setTeamName("teamB");
 		
 		List<MemberTeamDto> result = memberJpaRepository.search(condition);
 		

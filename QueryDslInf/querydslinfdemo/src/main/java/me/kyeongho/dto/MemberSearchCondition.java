@@ -8,7 +8,7 @@ public class MemberSearchCondition {
 	
 	private String username;
 	
-	private String teamNaem;
+	private String teamName;
 	
 	private Integer ageGoe;
 

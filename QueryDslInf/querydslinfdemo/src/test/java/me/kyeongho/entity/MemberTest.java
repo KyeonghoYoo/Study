@@ -10,7 +10,6 @@ import javax.persistence.PersistenceContext;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -20,7 +19,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @SpringBootTest
 @Transactional
-@Commit
 public class MemberTest {
 
 	@PersistenceContext
@@ -28,6 +26,7 @@ public class MemberTest {
 	
 	@Test
 	public void testEntity() {
+		// given
 		Team teamA = new Team("teamA");
 		Team teamB = new Team("teamB");
 		em.persist(teamA);
@@ -42,6 +41,7 @@ public class MemberTest {
 		em.persist(member3);
 		em.persist(member4);
 		
+		// when
 		JPAQueryFactory query = new JPAQueryFactory(em);
 		
 		List<Member> result = query.selectFrom(member).fetch();
@@ -51,6 +51,7 @@ public class MemberTest {
 			log.info("member.team = " + e.getTeam());
 		});
 		
+		// then
 		assertThat(member1).isIn(result);
 		assertThat(member2).isIn(result);
 		assertThat(member3).isIn(result);

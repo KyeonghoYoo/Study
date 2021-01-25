@@ -26,6 +26,7 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.CaseBuilder;
 import com.querydsl.core.types.dsl.Expressions;
+import com.querydsl.core.types.dsl.NumberExpression;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
@@ -378,7 +379,7 @@ public class QueryDslBasicTest {
 	}
 	
 	/**
-	 * 나이가 평균 이상인 회원 조회
+	 * in 사용
 	 */
 	@Test
 	public void subQeuryIn() {
@@ -442,6 +443,33 @@ public class QueryDslBasicTest {
 			System.out.println("s = " + string);
 		}
 	}
+	// orderBy에서 Case문 함께 사용하기
+	/**
+	 * 1. 0 ~ 30살이 아닌 회원을 가장 먼저 출력
+	 * 2. 0 ~ 20살 회원 출력
+	 * 3. 21 ~ 30살 회원 출력
+	 */
+	@Test
+	public void orderByCase() {
+		NumberExpression<Integer> rankPath = new CaseBuilder()
+						.when(member.age.between(0, 20)).then(2)
+						.when(member.age.between(21, 30)).then(1)
+						.otherwise(3);
+		
+		List<Tuple> result = queryFactory
+				.select(member.username, member.age, rankPath)
+				.from(member)
+				.orderBy(rankPath.asc())
+				.fetch();
+		
+		for (Tuple tuple : result) {
+			String username = tuple.get(member.username);
+			Integer age = tuple.get(member.age);
+			Integer rank = tuple.get(rankPath);
+			System.out.println("username = " + username + ", age = " + age + ", rank = " + rank);
+		}
+	}
+	
 	
 	//// 상수, 문자 더하기
 	@Test

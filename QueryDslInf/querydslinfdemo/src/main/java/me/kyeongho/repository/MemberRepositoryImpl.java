@@ -9,10 +9,14 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.support.PageableExecutionUtils;
 
 import com.querydsl.core.QueryResults;
+import com.querydsl.core.types.Order;
+import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.PathBuilder;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
@@ -21,6 +25,7 @@ import me.kyeongho.dto.MemberSearchCondition;
 import me.kyeongho.dto.MemberTeamDto;
 import me.kyeongho.dto.QMemberTeamDto;
 import me.kyeongho.entity.Member;
+import me.kyeongho.entity.QMember;
 
 @RequiredArgsConstructor
 public class MemberRepositoryImpl implements MemberRepositoryCustom {
@@ -75,7 +80,8 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
 	// 카운트 쿼리 분리해야할 때
 	@Override
 	public Page<MemberTeamDto> searchComplex(MemberSearchCondition condition, Pageable pageable) {
-		List<MemberTeamDto> content = queryFactory
+//		List<MemberTeamDto> content = queryFactory
+		JPAQuery<MemberTeamDto> query = queryFactory
 				.select(new QMemberTeamDto(
 						member.id.as("memberId"),
 						member.username, 
@@ -90,8 +96,16 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
 						ageGoe(condition.getAgeGoe()),
 						ageLoe(condition.getAgeLoe()))
 				.offset(pageable.getOffset())
-				.limit(pageable.getPageSize())
-				.fetch(); // fetchResults()가 아니라 fetch()한다.
+				.limit(pageable.getPageSize());
+//				.fetch(); // fetchResults()가 아니라 fetch()한다.
+		
+		for(Sort.Order o : pageable.getSort()) {
+			PathBuilder pathBuilder = new PathBuilder<>(member.getType(), member.getMetadata());
+			
+			query.orderBy(new OrderSpecifier(o.isAscending() ? Order.ASC : Order.DESC, pathBuilder.get(o.getProperty())));
+			
+		}
+		List<MemberTeamDto> content = query.fetch();
 		
 		JPAQuery<Member> countQuery = queryFactory
 				.select(member)
@@ -102,7 +116,7 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
 						ageGoe(condition.getAgeGoe()),
 						ageLoe(condition.getAgeLoe()));
 		
-		
+
 		
 //		return new PageImpl<>(content, pageable, total);
 		

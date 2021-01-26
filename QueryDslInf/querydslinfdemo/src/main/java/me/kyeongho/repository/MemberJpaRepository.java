@@ -3,19 +3,16 @@ package me.kyeongho.repository;
 import static me.kyeongho.entity.QMember.member;
 import static me.kyeongho.entity.QTeam.team;
 import static org.springframework.util.StringUtils.hasText;
-import static org.springframework.util.StringUtils.isEmpty;
 
 import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
 import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
@@ -24,7 +21,6 @@ import me.kyeongho.dto.MemberSearchCondition;
 import me.kyeongho.dto.MemberTeamDto;
 import me.kyeongho.dto.QMemberTeamDto;
 import me.kyeongho.entity.Member;
-import me.kyeongho.entity.QTeam;
 
 @Repository
 @RequiredArgsConstructor

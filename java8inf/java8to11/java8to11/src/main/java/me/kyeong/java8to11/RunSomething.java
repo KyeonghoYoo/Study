@@ -3,7 +3,7 @@ package me.kyeong.java8to11;
 @FunctionalInterface
 public interface RunSomething {
 	
-	void doIt();
+	int doIt(int number);
 	
 	static void printName() {
 		System.out.println("Kyeongho");

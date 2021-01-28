@@ -40,5 +40,6 @@ public class App
 		
 		Function<Integer, Integer> plust10AndMultiply2 = plus10_func.andThen(multiply2);
 		plust10AndMultiply2.apply(10); // 결과 40
+		
     }
 }

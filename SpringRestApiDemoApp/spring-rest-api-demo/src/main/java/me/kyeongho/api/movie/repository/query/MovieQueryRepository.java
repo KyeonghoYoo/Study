@@ -1,8 +1,12 @@
 package me.kyeongho.api.movie.repository.query;
 
+import static org.springframework.http.HttpStatus.UNAUTHORIZED;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientRequestException;
 
 import lombok.RequiredArgsConstructor;
 import me.kyeongho.api.movie.repository.ResponseMovieSerach;
@@ -31,6 +35,7 @@ public class MovieQueryRepository {
 						.build())
 				.accept(MediaType.APPLICATION_JSON)
 				.retrieve()
+				.onStatus(status -> status.compareTo(UNAUTHORIZED) == 0, ex -> Mono.error(new IllegalStateException("네이버 API 인증 실패")))
 				.bodyToMono(ResponseMovieSerach.class);
 	}
 }

@@ -38,7 +38,7 @@ public class MovieService {
 	private List<Movie> getListOrderRating(List<Movie> movieList) {
 		return movieList.stream()
 					.filter(movie -> !Float.valueOf(movie.getUserRating()).equals(0.0f))
-					.sorted((m1, m2) -> Float.compare(m1.getUserRating(), m2.getUserRating()))
+					.sorted((m1, m2) -> Float.compare(m2.getUserRating(), m1.getUserRating()))
 					.collect(Collectors.toList());
 	}
 }

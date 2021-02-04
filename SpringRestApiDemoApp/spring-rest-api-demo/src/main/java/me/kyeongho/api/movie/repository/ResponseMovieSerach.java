@@ -33,6 +33,12 @@ public class ResponseMovieSerach {
 		
 		private String link;
 		
+		private String image;
+		
+		private String subtitle;
+		
+		private String pubDate;
+		
 		private String actor;
 		
 		private String director;

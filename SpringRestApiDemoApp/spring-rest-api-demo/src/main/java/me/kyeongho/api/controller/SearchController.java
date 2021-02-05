@@ -20,7 +20,7 @@ public class SearchController {
 	private final MovieService movieService;
 	
 	@GetMapping("/movie")
-	public BaseResponse<List<Movie>> searchMovie(@RequestParam("query") String query) {
+	public BaseResponse<List<Movie>> searchMovie(@RequestParam("query") String query) throws Exception {
 		return new BaseResponse<List<Movie>>(movieService.search(query));
 	}
 	

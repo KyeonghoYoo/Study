@@ -27,8 +27,7 @@ public class MovieService {
 		
 		return movieQueryRepository.findByQuery(query)
 				.flux()
-				.toStream()
-				.findFirst()
+				.toStream().findFirst()
 				.get()
 				.getItems().stream()
 				.map(Movie::new)

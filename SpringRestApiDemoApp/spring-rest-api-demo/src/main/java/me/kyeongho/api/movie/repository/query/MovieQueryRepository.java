@@ -33,7 +33,7 @@ public class MovieQueryRepository {
 						.build())
 				.accept(MediaType.APPLICATION_JSON)
 				.retrieve()
-				.onStatus(HttpStatus::isError, ex -> ex.createException().flatMap(Mono::error))
+				.onStatus(HttpStatus::isError, ex -> ex.createException())
 				.bodyToMono(ResponseMovieSerach.class);
 	}
 }

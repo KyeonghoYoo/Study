@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.reactive.server.FluxExchangeResult;
@@ -16,9 +17,10 @@ import me.kyeongho.api.controller.SearchController;
 import me.kyeongho.api.movie.repository.ResponseMovieSerach;
 import me.kyeongho.api.movie.repository.query.MovieQueryRepository;
 import me.kyeongho.common.error.ErrorResponse;
+import me.kyeongho.common.error.exception.ErrorCode;
 
 @Slf4j
-@SpringBootTest
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @TestPropertySource(properties = { "kyeongho.api.naver.client.id = WORNGID",
 									"kyeongho.api.naver.client.secret = WORNGSECET"})
 public class MovieSearchExceptionTest {
@@ -44,7 +46,8 @@ public class MovieSearchExceptionTest {
 	@Test
 	void 네이버API_인증반환값_검증() {
 		webTestClient = WebTestClient
-						.bindToController(searchController)
+						.bindToServer()
+						.baseUrl("http://localhost:8080")
 						.build();
 		
 		webTestClient.get()
@@ -53,7 +56,10 @@ public class MovieSearchExceptionTest {
 							.queryParam("query", "반지의 제왕")
 							.build())
 			.exchange()
-			.expectStatus().is5xxServerError();
+			.expectStatus().is5xxServerError()
+			.expectBody()
+			.jsonPath("$.message").isEqualTo(ErrorCode.NAVER_API_UNAUTHORIZED.getMessage())
+			.jsonPath("$.code").isEqualTo(ErrorCode.NAVER_API_UNAUTHORIZED.getCode());
 	}
 	
 }

@@ -8,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.web.reactive.server.FluxExchangeResult;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
@@ -16,7 +15,6 @@ import lombok.extern.slf4j.Slf4j;
 import me.kyeongho.api.controller.SearchController;
 import me.kyeongho.api.movie.repository.ResponseMovieSerach;
 import me.kyeongho.api.movie.repository.query.MovieQueryRepository;
-import me.kyeongho.common.error.ErrorResponse;
 import me.kyeongho.common.error.exception.ErrorCode;
 
 @Slf4j
@@ -26,7 +24,7 @@ import me.kyeongho.common.error.exception.ErrorCode;
 public class MovieSearchExceptionTest {
 
 	@Autowired MovieQueryRepository queryRepository;
-
+	
 	@Autowired ApplicationContext context;
 	
 	@Autowired SearchController searchController;
@@ -36,7 +34,7 @@ public class MovieSearchExceptionTest {
 	@Test
 	void 네이버API_인증실패() {
 		assertThrows(WebClientResponseException.class, () -> {
-			ResponseMovieSerach response = queryRepository.findByQuery("반지의 제왕")
+			queryRepository.findByQuery("반지의 제왕")
 				.flux()
 				.toStream()
 				.findFirst().get();
@@ -44,7 +42,7 @@ public class MovieSearchExceptionTest {
 	}
 	
 	@Test
-	void 네이버API_인증반환값_검증() {
+	void 네이버API_인증에러반환값_검증() {
 		webTestClient = WebTestClient
 						.bindToServer()
 						.baseUrl("http://localhost:8080")

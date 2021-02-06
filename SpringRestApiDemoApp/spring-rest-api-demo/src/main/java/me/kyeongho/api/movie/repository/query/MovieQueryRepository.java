@@ -8,7 +8,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 import lombok.RequiredArgsConstructor;
 import me.kyeongho.api.movie.repository.ResponseMovieSerach;
 import me.kyeongho.common.NaverApiClientProperties;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Repository

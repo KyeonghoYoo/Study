@@ -3,6 +3,7 @@ package me.kyeongho.api.movie.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ public class MovieService {
 
 	private final MovieQueryRepository movieQueryRepository;
 	
+	@Cacheable(value = "search", key = "#query")
 	public List<Movie> search(final String query) {
 		return findByQuery(query);
 	}

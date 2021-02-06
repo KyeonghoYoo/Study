@@ -57,13 +57,15 @@ public class MovieServiceTest {
 	void 유저점수_없는_데이터_정제() {
 		final int expectedSize = 4;
 		
+		// given
 		given(mockMovieQueryRepository.findByQuery(anyString()))
 				.willReturn(getItemsResponseMovieSearchIncudeNoUserRaiting());
 		MovieService newMovieService = new MovieService(mockMovieQueryRepository);
 		
+		// when
 		List<Movie> result = newMovieService.searchOrderByUserRating("반지의 제왕");
 		
-		
+		// then
 		assertThat(result.size()).isEqualTo(expectedSize);
 	}
 	

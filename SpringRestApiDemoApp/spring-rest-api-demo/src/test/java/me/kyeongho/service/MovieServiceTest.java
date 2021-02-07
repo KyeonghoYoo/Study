@@ -72,9 +72,9 @@ public class MovieServiceTest {
 	private Mono<ResponseMovieSerach> getItemsResponseMovieSearchIncudeNoUserRaiting() {
 		ResponseMovieSerach responseMovieSearchList = new ResponseMovieSerach(
 				LocalDateTime.now().toString(),
-				0,
+				6,
 				1,
-				0,
+				6,
 				new ArrayList<>());
 		
 		List<Item> items = responseMovieSearchList.getItems();

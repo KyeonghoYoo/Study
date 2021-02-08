@@ -1,5 +1,6 @@
 package me.kyeong.java8to11;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 /**
@@ -40,6 +41,8 @@ public class App
 		
 		Function<Integer, Integer> plust10AndMultiply2 = plus10_func.andThen(multiply2);
 		plust10AndMultiply2.apply(10); // 결과 40
+		
+		BiFunction<Integer, Integer, Integer> biFunction = (i, j) -> i + j;
 		
     }
 }

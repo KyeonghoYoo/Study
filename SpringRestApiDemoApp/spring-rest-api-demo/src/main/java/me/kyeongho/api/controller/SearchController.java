@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
+import me.kyeongho.api.movie.MovieSearchCondition;
 import me.kyeongho.api.movie.repository.Movie;
 import me.kyeongho.api.movie.service.MovieService;
 import me.kyeongho.common.BaseResponse;
@@ -20,8 +21,14 @@ public class SearchController {
 	private final MovieService movieService;
 	
 	@GetMapping("/movie")
-	public BaseResponse<List<Movie>> searchMovie(@RequestParam("query") String query) throws Exception {
-		return new BaseResponse<List<Movie>>(movieService.search(query));
+	public BaseResponse<List<Movie>> searchMovie(final MovieSearchCondition condition) throws Exception {
+		String query = condition.getQuery();
+		
+		if(condition.isOrderByUserRating()) {
+			return new BaseResponse<List<Movie>>(movieService.searchOrderByUserRating(query));
+		} else {
+			return new BaseResponse<List<Movie>>(movieService.search(query));
+		}
 	}
 	
 }

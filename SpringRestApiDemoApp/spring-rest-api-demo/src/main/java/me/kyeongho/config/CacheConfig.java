@@ -1,5 +1,7 @@
 package me.kyeongho.config;
 
+import java.time.Duration;
+
 import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,7 +27,8 @@ public class CacheConfig {
 						.serializeKeysWith(
 								RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
 						.serializeValuesWith(
-								RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()));
+								RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()))
+						.entryTtl(Duration.ofMinutes(10l));
 		
 		RedisCacheManager redisCacheManager = RedisCacheManagerBuilder
 						.fromConnectionFactory(connectionFactory)

@@ -1,0 +1,13 @@
+server:
+  port: 0 # 0번 주입하면 Random Port 실행
+
+spring:
+  application:
+    name: user-service
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://10.10.100.145:8761/eureka

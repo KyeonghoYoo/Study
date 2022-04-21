@@ -46,3 +46,8 @@ spring:
           uri: lb://USER-SERVICE
           predicates:
              - Path=/user-service/**
+        # catalog-service 라우팅 정보
+        - id: catalog-service
+          uri: lb://CATALOG-SERVICE
+          predicates:
+            - Path=/catalog-service/**

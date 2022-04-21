@@ -1,0 +1,65 @@
+1server:
+  port: 0 # 0번 주입하면 Random Port 실행가능
+
+spring:
+  application:
+    name: catalog-service
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true # 외부 웹 접속 허용
+      path: /h2-console
+  jpa:
+    open-in-view: false
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        default_batch_fetch_szie: 100
+    # jpa가 제공하는 ddl auto 기능 수행 후 data.sql을 통한 데이터베이스 초기화 동작을 수행하고 싶을때 true 값을 줘야함.
+    # ref: https://docs.spring.io/spring-boot/docs/current/reference/html/howto.html#howto.data-initialization
+    defer-datasource-initialization: true
+  datasource:
+    url: jdbc:h2:mem:test
+    driver-class-name: org.h2.Driver
+    username: sa # 현재는 h2 임베디드 데이터베이스를 간단하게 활용하고 있기 때문에 유저네임과 패스워드가 필요하지 않는다.
+    password:
+  sql:
+    init:
+      # 초기화 스크립트 실행을 언제 수행할 것인지 정하는 설정
+      mode: embedded
+      # 초기화 스크립트(scheme.sql, data.sql)이 에러를 일으켜도 애플리케이션 구동을 이어나갈것인지 설정
+      continue-on-error: true
+  output:
+    ansi:
+      enabled: always
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}} # 여러 유저 서비스 인스턴스가 존재하더라도 겹치지 않고 등록뙤도록 패턴 망명
+
+logging:
+  level:
+    org.hibernate.sql: debug
+    me.kyeongho.catalogservice: debug
+
+decorator:
+  datasource:
+    p6spy:
+      enable-logging: true
+      multiline: true
+      logging: slf4j
+      tracing:
+        include-parameter-values: true
+
+greeting:
+  message: Welcome to the Simple E-Commerce.

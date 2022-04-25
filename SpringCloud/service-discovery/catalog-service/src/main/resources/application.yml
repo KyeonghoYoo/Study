@@ -1,4 +1,4 @@
-1server:
+server:
   port: 0 # 0번 주입하면 Random Port 실행가능
 
 spring:

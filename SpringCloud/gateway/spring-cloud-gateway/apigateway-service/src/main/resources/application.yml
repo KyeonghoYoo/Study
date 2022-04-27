@@ -42,10 +42,37 @@ spring:
                 preLogger: true
                 postLogger: true
         # user-service 라우팅 정보
+#        - id: user-service
+#          uri: lb://USER-SERVICE
+#          predicates:
+#            - Path=/user-service/**
+        # user-service/로그인 API 라우팅 설정
         - id: user-service
           uri: lb://USER-SERVICE
           predicates:
-             - Path=/user-service/**
+            - Path=/user-service/login
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+        # user-service/회원가입 API 라우팅 설정
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/users
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+        # 그 외 user-service의 GET 방식의 API들 라우팅 설정
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/**
+            - Method=GET
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
         # catalog-service 라우팅 정보
         - id: catalog-service
           uri: lb://CATALOG-SERVICE

@@ -6,10 +6,14 @@ import me.kyeongho.userservice.entity.UserEntity;
 import me.kyeongho.userservice.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 @Transactional(readOnly = true)
@@ -53,5 +57,33 @@ public class UserServiceImpl implements UserService {
     @Override
     public Iterable<UserEntity> getUserByAll() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public UserDto getUserDetailsByEmail(String email) {
+        UserEntity userEntity = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException(String.format("could not found User for %s", email)));
+
+        ModelMapper mapper = new ModelMapper();
+        mapper.getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.STRICT);
+
+        return mapper.map(userEntity, UserDto.class);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        UserEntity userEntity = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException(String.format("Could not found user for %s", email)));
+
+        return new User(
+                userEntity.getEmail(),
+                userEntity.getEncryptedPwd(),
+                true,
+                true,
+                true,
+                true,
+                new ArrayList<>()
+        );
     }
 }

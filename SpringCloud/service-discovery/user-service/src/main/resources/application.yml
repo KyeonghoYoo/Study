@@ -25,6 +25,9 @@ spring:
     driver-class-name: org.h2.Driver
     username: sa # 현재는 h2 임베디드 데이터베이스를 간단하게 활용하고 있기 때문에 유저네임과 패스워드가 필요하지 않는다.
     password:
+  devtools:
+    livereload:
+      enabled: true
 
 eureka:
   client:
@@ -38,6 +41,7 @@ eureka:
 logging:
   level:
     org.hibernate.sql: debug
+    me.kyeongho.userservice: debug
 
 decorator:
   datasource:
@@ -50,3 +54,11 @@ decorator:
 
 greeting:
   message: Welcome to the Simple E-Commerce.
+
+jwt:
+  token:
+    header: Authorization
+    issuer: me.kyeongho
+    client-secret: user_microservice_enough_long_secret_key
+    access-expiry: 600000000
+    ignore-url: [ /refresh, /webjars/**, /static/**, /favicon.ico, /templates/**, /h2/**, /h2-console/**, /v3/api-docs, /swagger-resources/**, /**/favicon.*, /*.html, /**/*.html, /**/*.css, /**/*.js, /**/*.bmp, /**/*.png, /v3/api-docs/swagger-config, /**/*.map ]

@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController()
-@RequestMapping(path = "/user-service/")
+@RequestMapping(path = "/")
 @EnableConfigurationProperties({GreetingProperties.class})
 @RequiredArgsConstructor
 public class UserController {

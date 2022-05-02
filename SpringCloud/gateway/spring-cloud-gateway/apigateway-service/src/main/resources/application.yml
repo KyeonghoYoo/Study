@@ -8,6 +8,14 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka
 
+jwt:
+  token:
+    header: Authorization
+    issuer: me.kyeongho
+    client-secret: user_microservice_enough_long_secret_key
+    access-expiry: 600000000
+    ignore-url: [ /refresh, /webjars/**, /static/**, /favicon.ico, /templates/**, /h2/**, /h2-console/**, /v3/api-docs, /swagger-resources/**, /**/favicon.*, /*.html, /**/*.html, /**/*.css, /**/*.js, /**/*.bmp, /**/*.png, /v3/api-docs/swagger-config, /**/*.map ]
+
 spring:
   application:
     name: apigateway-service
@@ -64,6 +72,14 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/welcome, /user-service/health_check,/user-service/h2-console
+            - Method=GET
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
         # 그 외 user-service의 GET 방식의 API들 라우팅 설정
         - id: user-service
           uri: lb://USER-SERVICE
@@ -73,6 +89,7 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+            - AuthorizationHeaderFilter
         # catalog-service 라우팅 정보
         - id: catalog-service
           uri: lb://CATALOG-SERVICE

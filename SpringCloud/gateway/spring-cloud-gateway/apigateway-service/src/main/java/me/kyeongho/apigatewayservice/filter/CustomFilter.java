@@ -3,6 +3,7 @@ package me.kyeongho.apigatewayservice.filter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
+import org.springframework.core.env.PropertySource;
 import org.springframework.http.server.reactive.ServerHttpRequest; // RxJava라 불리는 Reactive Java를 지원하는 패키지
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;

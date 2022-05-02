@@ -45,6 +45,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 // URL path 별 접근 권한 설정
                 .authorizeRequests()
+                    .antMatchers("/actuator/**")
+                        .permitAll()
                     .antMatchers("/users/**")
                         .hasIpAddress("10.10.100.145")
                 .and()

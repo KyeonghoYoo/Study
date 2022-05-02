@@ -80,6 +80,14 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/actuator/**
+            - Method=GET, POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
         # 그 외 user-service의 GET 방식의 API들 라우팅 설정
         - id: user-service
           uri: lb://USER-SERVICE
@@ -100,3 +108,9 @@ spring:
           uri: lb://ORDER-SERVICE
           predicates:
             - Path=/order-service/**
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, refresh, beans, httptrace

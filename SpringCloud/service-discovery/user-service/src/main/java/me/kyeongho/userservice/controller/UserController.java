@@ -34,7 +34,7 @@ public class UserController {
                 "it's Working in User Service on" +
                         " PORT(local.server.port) = %s" +
                         ", PORT(server.port) = %s" +
-                        ", token secret = %s," +
+                        ", token secret = %s" +
                         ", token expiration time = %s",
                 env.getProperty("local.server.port"),
                 env.getProperty("server.port"),

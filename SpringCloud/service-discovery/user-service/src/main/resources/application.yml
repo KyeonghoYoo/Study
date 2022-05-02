@@ -55,10 +55,10 @@ decorator:
 greeting:
   message: Welcome to the Simple E-Commerce.
 
-jwt:
-  token:
-    header: Authorization
-    issuer: me.kyeongho
-    client-secret: user_microservice_enough_long_secret_key
-    access-expiry: 600000000
-    ignore-url: [ /refresh, /webjars/**, /static/**, /favicon.ico, /templates/**, /h2/**, /h2-console/**, /v3/api-docs, /swagger-resources/**, /**/favicon.*, /*.html, /**/*.html, /**/*.css, /**/*.js, /**/*.bmp, /**/*.png, /v3/api-docs/swagger-config, /**/*.map ]
+#jwt:
+#  token:
+#    header: Authorization
+#    issuer: me.kyeongho
+#    client-secret: user_microservice_enough_long_secret_key
+#    access-expiry: 600000000
+#    ignore-url: [ /refresh, /webjars/**, /static/**, /favicon.ico, /templates/**, /h2/**, /h2-console/**, /v3/api-docs, /swagger-resources/**, /**/favicon.*, /*.html, /**/*.html, /**/*.css, /**/*.js, /**/*.bmp, /**/*.png, /v3/api-docs/swagger-config, /**/*.map ]

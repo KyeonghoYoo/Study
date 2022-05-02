@@ -24,13 +24,23 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final Environment env; // org.springframework.core.env.Environment 빈 Constructor Autowired로 주입 받기
+    private final Environment env; // org.springframework.core.env.Environment 빈 Constructor Autowired로 주입 받기, config server로 부터 받아온 외부속성과 연동됨
     private final GreetingProperties greetingProperties;
     private final UserService userService;
 
     @GetMapping(path = "/health_check")
     public String status() {
-        return String.format("it's Working in User Service on PORT %s", env.getProperty("local.server.port"));
+        return String.format(
+                "it's Working in User Service on" +
+                        " PORT(local.server.port) = %s" +
+                        ", PORT(server.port) = %s" +
+                        ", token secret = %s," +
+                        ", token expiration time = %s",
+                env.getProperty("local.server.port"),
+                env.getProperty("server.port"),
+                env.getProperty("jwt.token.client-secret"),
+                env.getProperty("jwt.token.access-expiry")
+        );
     }
 
     @GetMapping(path = "/welcome")

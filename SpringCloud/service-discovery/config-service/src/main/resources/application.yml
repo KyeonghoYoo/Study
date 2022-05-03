@@ -4,6 +4,13 @@ server:
 spring:
   application:
     name: config-service
+  profiles:
+    active: git
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
   cloud:
     config:
       server:
@@ -17,3 +24,8 @@ spring:
             - SpringCloud/configFiles
           # 가져올 config 파일이 존재하는 브랜치를 정해줌
           default-label: "#4-SpringBootCloudMicroservices"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, beans, health, busrefresh

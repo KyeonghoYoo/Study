@@ -2,7 +2,7 @@ jwt:
   token:
     header: Authorization
     issuer: me.kyeongho
-    client-secret: changed_dev_ecommerce_service_enough_long_secret_key
+    client-secret: default_ecommerce_service_enough_long_secret_key
     access-expiry: 86400000
     ignore-url:
       [

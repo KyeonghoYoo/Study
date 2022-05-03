@@ -9,4 +9,11 @@ spring:
       server:
         git:
           # 파일 시스템 사용
-          uri: file:///Users/ae210433/Desktop/Git/git-local-repo
+#          uri: file:///Users/ae210433/Desktop/Git/git-local-repo
+          # public repository이기 때문에 인증 정보가 필요하지 않다.
+          uri: https://github.com/KyeonghoYoo/Study.git
+          # config 파일이 존재하는 서브 디렉토리를 기입함
+          search-paths:
+            - SpringCloud/configFiles
+          # 가져올 config 파일이 존재하는 브랜치를 정해줌
+          default-label: "#4-SpringBootCloudMicroservices"

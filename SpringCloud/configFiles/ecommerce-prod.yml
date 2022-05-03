@@ -1,0 +1,30 @@
+jwt:
+  token:
+    header: Authorization
+    issuer: me.kyeongho
+    client-secret: prod_commerce_service_enough_long_secret_key
+    access-expiry: 86400000
+    ignore-url:
+      [
+        /refresh,
+        /webjars/**,
+        /static/**,
+        /favicon.ico,
+        /templates/**,
+        /h2/**,
+        /h2-console/**,
+        /v3/api-docs,
+        /swagger-resources/**,
+        /**/favicon.*,
+        /*.html,
+        /**/*.html,
+        /**/*.css,
+        /**/*.js,
+        /**/*.bmp,
+        /**/*.png,
+        /v3/api-docs/swagger-config,
+        /**/*.map,
+      ]
+
+gateway:
+  ip: 10.10.100.145

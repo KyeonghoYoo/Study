@@ -1,10 +1,8 @@
 spring:
   cloud:
     config:
-      uri: http://localhost:8888
       # spring.application.name override하여 config 서버에서 외부설정 속성을 가져옴
       name: ecommerce
+      uri: http://localhost:8888
   profiles:
     active: dev
-
-# https://github.com/KyeonghoYoo/Study.git

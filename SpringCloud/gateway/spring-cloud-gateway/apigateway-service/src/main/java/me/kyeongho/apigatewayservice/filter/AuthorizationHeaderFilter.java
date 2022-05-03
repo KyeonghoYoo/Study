@@ -71,7 +71,7 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
                 .requireIssuer(jwtProperties.getIssuer())
                 .setSigningKey(secretKey)
                 .build();
-        Jws<Claims> claimsJws = parser.parseClaimsJws(jwt);
+        Jws<Claims> claimsJws;
         try {
             claimsJws = parser.parseClaimsJws(jwt);
         } catch (Exception e) {

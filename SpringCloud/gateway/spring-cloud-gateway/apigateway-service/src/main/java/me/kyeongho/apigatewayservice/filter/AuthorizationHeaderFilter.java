@@ -66,7 +66,13 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
     }
 
     private boolean isJwtValid(String jwt) {
-        SecretKey secretKey = Keys.hmacShaKeyFor(jwtProperties.getClientSecret().getBytes(StandardCharsets.UTF_8));
+        SecretKey secretKey;
+        try {
+            secretKey = Keys.hmacShaKeyFor(jwtProperties.getClientSecret().getBytes(StandardCharsets.UTF_8));
+        } catch (Exception e) {
+            log.error("Invalid Client Secret Key", e);
+            return false;
+        }
         JwtParser parser = Jwts.parserBuilder()
                 .requireIssuer(jwtProperties.getIssuer())
                 .setSigningKey(secretKey)

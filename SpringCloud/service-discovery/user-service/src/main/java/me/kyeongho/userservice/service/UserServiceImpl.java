@@ -4,24 +4,35 @@ import lombok.RequiredArgsConstructor;
 import me.kyeongho.userservice.dto.UserDto;
 import me.kyeongho.userservice.entity.UserEntity;
 import me.kyeongho.userservice.repository.UserRepository;
+import me.kyeongho.userservice.vo.ResponseOrder;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.core.env.Environment;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+
+import static java.util.Objects.requireNonNull;
 
 @Transactional(readOnly = true)
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
+    private final Environment env;
     private final PasswordEncoder passwordEncoder;
+    private final RestTemplate restTemplate;
     private final UserRepository userRepository;
 
     @Transactional
@@ -51,6 +62,21 @@ public class UserServiceImpl implements UserService {
         mapper.getConfiguration()
                 .setMatchingStrategy(MatchingStrategies.STRICT);
         UserDto userDto = mapper.map(userEntity, UserDto.class);
+
+//        String orderUrl = "http://127.0.0.1:8000/order-service/%s/orders";
+        String orderUrl = String.format(requireNonNull(env.getProperty("order-service.url")), userId);
+
+        ResponseEntity<List<ResponseOrder>> orderListResponse =
+                restTemplate.exchange(
+                    orderUrl,
+                    HttpMethod.GET,
+                    null,
+                    new ParameterizedTypeReference<>() {}
+                );
+
+        List<ResponseOrder> responseBody = orderListResponse.getBody();
+        userDto.setOrders(responseBody);
+
         return userDto;
     }
 

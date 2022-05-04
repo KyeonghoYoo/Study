@@ -4,4 +4,4 @@ spring:
       name: ecommerce
       uri: http://localhost:8888
   profiles:
-    active: dev
+    active: default

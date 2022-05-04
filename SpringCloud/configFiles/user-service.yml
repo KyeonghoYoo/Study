@@ -10,4 +10,7 @@ spring:
     password: "{cipher}AQAM9Qk+5gR2mbwlxxtowmZdPaAiXIGaaukgqG4SPK1mD0PfcsyeSvroXhoVSBGglaJ0JXMI8n1/LGQZNKLpyGcsJWH0Q6aZ+U4UPrNnLQ9WI0K5P6lwWELJt2EEh75q3I+tAa6LIHEEjof9/ZVxJ9Xw/eYypxh8NxNUHDLbz4DS7c46Q4Q1wkNo698e+TEoF2xFeiGwNHj5ot/N3ygAb27TKrz1qpSmPI0fAwd8lfQSVmSYabNUmcTZQMJjvxQLHHSEz/d90IjxQ1PP+c3+C5fLqPxVKajKO1Fkt9cjF4xVCvlh1rvHEkjjDhi4+l+fE5/tJg1JimwSROq8ryz6iRZ9cvDAfnFlmYJPmlFhp9pen5xZwp0TNG9uutbbbzuD5UE="
 
 order-service:
-  url: "http://127.0.0.1:8000/order-service/%s/orders"
+  # url: "http://127.0.0.1:8000/order-service/%s/orders"
+  # eureka 서버에 등록된 서비스 이름을 기입하여 유레카 서버에서 서비스 이름으로 호스트를 받아옴
+  # @LoadBalanced 어노테이션을 RestTemplate 빈 등록시 사용하면 적용가능
+  url: "http://order-service/order-service/%s/orders"

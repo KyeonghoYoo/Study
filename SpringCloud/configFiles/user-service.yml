@@ -14,3 +14,5 @@ order-service:
   # eureka 서버에 등록된 서비스 이름을 기입하여 유레카 서버에서 서비스 이름으로 호스트를 받아옴
   # @LoadBalanced 어노테이션을 RestTemplate 빈 등록시 사용하면 적용가능
   url: "http://order-service/order-service/%s/orders"
+  exception:
+    order-is-empty: "User's orders is emptye"

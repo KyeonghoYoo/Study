@@ -1,0 +1,8 @@
+spring:
+  # docker postgres 이미지를 사용해 postgres 디비를 실행하고 연결
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ecommerce
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    # password: 1234
+    password: "{cipher}AQC8Z4o7zBtBf+//CXITbGxxBoCMdHHITyTQgmTtouwFxcszQuCy0DwB5dmBYguSisz0H/SdGs2T1lD9eeArTD5fJis10FT+KnqE1J6kpt5U2CB6OEFiy+90I5sqUuvAVElPXDKhJySFItto+xzKKn/khocCmZaBa2YJYaXVQtT/dI6dZ8yeUNhrLtONpqXCTckFVbf0TbXck9QKgQCQbjlj7qOEHGFVsuUeOdYCso05pSNDCq7BR0jyIh7n0ZFK/tDaNyOLO8XdvM81uVd61S3iKmx/fAHFk+kHmV5oehhzzk/+YzEPfpKSGTMJbMJACfBp10sK/H/fIO70vCR0moXlNbi1oqJWn27UYbzOLBdGBbShxNRnLRw+9BlnJJMifgw="

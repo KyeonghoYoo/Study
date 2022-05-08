@@ -11,7 +11,7 @@ import java.util.List;
 public interface OrderServiceClient {
 
 //    @RequestMapping(path = "/order-service/{userId}/orders")
-    @RequestMapping(path = "/order-service/{userId}/orders_ng") // 잘못된 api path 호출
+    @RequestMapping(path = "/order-service/{userId}/orders") // 잘못된 api path 호출
     List<ResponseOrder> getOrders(@PathVariable String userId);
 
 }

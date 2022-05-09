@@ -2,6 +2,7 @@ package me.kyeongho.orderservice.controller;
 
 import lombok.RequiredArgsConstructor;
 import me.kyeongho.orderservice.config.messagequeue.KafkaProducer;
+import me.kyeongho.orderservice.config.messagequeue.OrderProducer;
 import me.kyeongho.orderservice.dto.OrderDto;
 import me.kyeongho.orderservice.entity.OrderEntity;
 import me.kyeongho.orderservice.service.OrderService;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(path = "/order-service/")
@@ -25,6 +27,7 @@ public class OrderController {
     private final Environment env;
     private final OrderService orderService;
     private final KafkaProducer kafkaProducer;
+    private final OrderProducer orderProducer;
 
     @GetMapping(path = "/health_check")
     public String status() {
@@ -45,15 +48,21 @@ public class OrderController {
         mapper.getConfiguration()
                 .setMatchingStrategy(MatchingStrategies.STRICT);
 
-        /* JPA WORKING */
         OrderDto orderDto = mapper.map(requestOrder, OrderDto.class);
         orderDto.setUserId(userId);
-        OrderDto createdOrderDto = orderService.createOrder(orderDto);
 
-        ResponseOrder responseOrder = mapper.map(createdOrderDto, ResponseOrder.class);
+        /* JPA WORKING */
+//        OrderDto createdOrderDto = orderService.createOrder(orderDto);
+//        ResponseOrder responseOrder = mapper.map(createdOrderDto, ResponseOrder.class);
 
-        /* SEND THIS ORDER TO KAFKA */
-        kafkaProducer.send("example-catalog-topic", createdOrderDto);
+        /* KAFKA CONNECTOR WORKING */
+        orderDto.setOrderId(UUID.randomUUID().toString());
+        orderDto.setTotalPrice(orderDto.getUnitPrice() * orderDto.getQty());
+        orderProducer.send("orders", orderDto);
+        ResponseOrder responseOrder = mapper.map(orderDto, ResponseOrder.class);
+
+        /* SEND AN ORDER TO KAFKA */
+        kafkaProducer.send("example-catalog-topic", orderDto);
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)

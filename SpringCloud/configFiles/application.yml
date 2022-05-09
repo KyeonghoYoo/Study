@@ -29,9 +29,10 @@ jwt:
 
 gateway:
   ip: 10.10.100.145
+
 kafka:
   consumer:
     group-id: consumerGroupId
   server:
-    ip: 127.0.0.1
+    host: 127.0.0.1
     port: 9092

@@ -1,6 +1,7 @@
 package me.kyeongho.orderservice.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import me.kyeongho.orderservice.config.messagequeue.KafkaProducer;
 import me.kyeongho.orderservice.config.messagequeue.OrderProducer;
 import me.kyeongho.orderservice.dto.OrderDto;
@@ -22,6 +23,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping(path = "/order-service/")
 @RequiredArgsConstructor
+@Slf4j
 public class OrderController {
 
     private final Environment env;
@@ -71,11 +73,12 @@ public class OrderController {
 
     @GetMapping(path = "/{userId}/orders")
     public ResponseEntity<List<ResponseOrder>> getOrders(@PathVariable(name = "userId") String userId) {
+        log.info("Before retrieve orders data");
         ModelMapper mapper = new ModelMapper();
         mapper.getConfiguration()
                 .setMatchingStrategy(MatchingStrategies.STRICT);
         Iterable<OrderEntity> orderEntityIterable = orderService.getAllOrdersByUserId(userId);
-
+        log.info("After retrieve orders data");
         ArrayList<ResponseOrder> responseOrders = new ArrayList<>();
 
         orderEntityIterable

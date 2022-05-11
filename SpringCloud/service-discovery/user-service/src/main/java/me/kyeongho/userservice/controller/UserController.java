@@ -1,5 +1,6 @@
 package me.kyeongho.userservice.controller;
 
+import io.micrometer.core.annotation.Timed;
 import lombok.RequiredArgsConstructor;
 import me.kyeongho.userservice.dto.UserDto;
 import me.kyeongho.userservice.entity.UserEntity;
@@ -29,6 +30,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping(path = "/health_check")
+    @Timed(value = "users.status", longTask = true) // 메소드 단위의 메트릭을 수집함
     public String status() {
         return String.format(
                 "it's Working in User Service on" +
@@ -44,6 +46,7 @@ public class UserController {
     }
 
     @GetMapping(path = "/welcome")
+    @Timed(value = "users.welcome", longTask = true)
     public String welcome() {
 //        return env.getProperty("greeting.message"); # Environment 빈을 통해 시스템 프로퍼티 가져오기
         return greetingProperties.getMessage();

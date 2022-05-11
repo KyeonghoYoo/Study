@@ -1,5 +1,6 @@
 package me.kyeongho.orderservice.controller;
 
+import io.micrometer.core.annotation.Timed;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.kyeongho.orderservice.config.messagequeue.KafkaProducer;
@@ -32,11 +33,13 @@ public class OrderController {
     private final OrderProducer orderProducer;
 
     @GetMapping(path = "/health_check")
+    @Timed(value = "orders.status", longTask = true)
     public String status() {
         return String.format("it's Working in User Service on PORT %s", env.getProperty("local.server.port"));
     }
 
     @GetMapping(path = "/welcome")
+    @Timed(value = "orders.welcome", longTask = true)
     public String welcome() {
         return env.getProperty("greeting.message");
     }

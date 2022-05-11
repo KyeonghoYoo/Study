@@ -70,7 +70,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: refresh, health, beans, busrefresh
+        include: refresh, health, beans, busrefresh, info, metrics, prometheus
 
 # 기존에 존재하던 jwt 관련 속성들 config 서버로 이관
 #jwt:

@@ -48,7 +48,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .antMatchers("/actuator/**")
                         .permitAll()
                     .antMatchers("/users/**")
-                        .hasIpAddress("10.10.100.145")
+//                        .hasIpAddress("10.10.100.145")
+                        .permitAll()
                 .and()
                 .addFilter(getAuthenticationFilter());
     }

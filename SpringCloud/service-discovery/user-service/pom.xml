@@ -16,6 +16,8 @@
     <properties>
         <java.version>11</java.version>
         <spring-cloud.version>2020.0.3</spring-cloud.version>
+        <springdoc-openapi.version>1.6.8</springdoc-openapi.version>
+        <spring-boot-admin.version>2.5.6</spring-boot-admin.version>
     </properties>
     <dependencies>
         <dependency>
@@ -128,6 +130,35 @@
             <artifactId>jjwt-jackson</artifactId>
             <version>0.11.2</version>
         </dependency>
+        <!-- springdoc -->
+        <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>${springdoc-openapi.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-security -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-security</artifactId>
+            <version>${springdoc-openapi.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-data-rest -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-data-rest</artifactId>
+            <version>${springdoc-openapi.version}</version>
+        </dependency>
+        <!-- Spring Boot Admin Client -->
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-starter-client</artifactId>
+        </dependency>
+        <!-- jolokia - JMX Bean과 상호작용하기 위한 라이브러리, Spring Boot Admin Server가 UI를 통해 조작할 수 있도록 지원하기 위한 필수 Dependency -->
+        <dependency>
+            <groupId>org.jolokia</groupId>
+            <artifactId>jolokia-core</artifactId>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
@@ -135,6 +166,13 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-dependencies</artifactId>
+                <version>${spring-boot-admin.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

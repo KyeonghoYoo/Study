@@ -1,3 +1,9 @@
+# spring:
+#   boot:
+#     admin:
+#       client:
+#         url: http://localhost:8083 # eureka와 같은 discovery 서비스로 부터 수집대상을 조회하므로 필요없음.
+
 jwt:
   token:
     header: Authorization

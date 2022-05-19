@@ -10,6 +10,8 @@ spring:
   sleuth:
     sampler:
       probability: 1.0
+    reactor:
+      instrumentation-type: decorate_on_each
   rabbitmq:
     host: 127.0.0.1
     port: 5672
@@ -39,6 +41,12 @@ spring:
   devtools:
     livereload:
       enabled: true
+  boot:
+    admin:
+      client:
+        enabled: true
+  jmx:
+    enabled: true
 
 eureka:
   client:
@@ -63,6 +71,12 @@ decorator:
       tracing:
         include-parameter-values: true
 
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+
 greeting:
   message: Welcome to the Simple E-Commerce.
 
@@ -70,7 +84,11 @@ management:
   endpoints:
     web:
       exposure:
-        include: refresh, health, beans, busrefresh, info, metrics, prometheus
+        include: '*'
+#        include: refresh, health, beans, busrefresh, info, metrics, prometheus
+  endpoint:
+    health:
+      show-details: always
 
 # 기존에 존재하던 jwt 관련 속성들 config 서버로 이관
 #jwt:

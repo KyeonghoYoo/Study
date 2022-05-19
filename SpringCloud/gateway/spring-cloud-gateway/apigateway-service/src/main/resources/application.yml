@@ -121,6 +121,13 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/order-service/(?<segment>.*), /$\{segment}
+        # spring-boot-admin-server 라우팅 정보
+        - id: spring-boot-admin-server
+          uri: lb://SPRING-BOOT-ADMIN-SERVER
+          predicates:
+            - Path=/spring-boot-admin-server/**
+          filters:
+            - RewritePath=/spring-boot-admin-server/(?<segment>.*), /$\{segment}
 
 management:
   endpoints:

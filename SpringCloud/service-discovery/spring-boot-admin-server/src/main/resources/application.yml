@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: spring-boot-admin-server
+
+server:
+  port: 0 # 0? ???? Random Port ????
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, busrefresh, info
+  endpoint:
+    health:
+      show-details: always

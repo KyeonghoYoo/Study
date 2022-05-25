@@ -26,6 +26,3 @@ jwt:
         /v3/api-docs/swagger-config,
         /**/*.map,
       ]
-
-gateway:
-  ip: 10.10.100.145

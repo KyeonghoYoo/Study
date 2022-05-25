@@ -34,7 +34,7 @@ jwt:
       ]
 
 gateway:
-  ip: 10.10.100.145
+  ip: 172.18.0.5
 
 kafka:
   consumer:

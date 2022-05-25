@@ -57,14 +57,14 @@ public class OrderController {
         orderDto.setUserId(userId);
 
         /* JPA WORKING */
-//        OrderDto createdOrderDto = orderService.createOrder(orderDto);
-//        ResponseOrder responseOrder = mapper.map(createdOrderDto, ResponseOrder.class);
+        OrderDto createdOrderDto = orderService.createOrder(orderDto);
+        ResponseOrder responseOrder = mapper.map(createdOrderDto, ResponseOrder.class);
 
         /* KAFKA CONNECTOR WORKING */
-        orderDto.setOrderId(UUID.randomUUID().toString());
-        orderDto.setTotalPrice(orderDto.getUnitPrice() * orderDto.getQty());
-        orderProducer.send("orders", orderDto);
-        ResponseOrder responseOrder = mapper.map(orderDto, ResponseOrder.class);
+//        orderDto.setOrderId(UUID.randomUUID().toString());
+//        orderDto.setTotalPrice(orderDto.getUnitPrice() * orderDto.getQty());
+//        orderProducer.send("orders", orderDto);
+//        ResponseOrder responseOrder = mapper.map(orderDto, ResponseOrder.class);
 
         /* SEND AN ORDER TO KAFKA */
         kafkaProducer.send("example-catalog-topic", orderDto);

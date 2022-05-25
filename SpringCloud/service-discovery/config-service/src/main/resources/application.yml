@@ -14,6 +14,8 @@ spring:
   cloud:
     config:
       server:
+#        native:
+#          search-locations: file:///${user.home}\Desktop\Git\Study\SpringCloud\configFiles # local config repository
         git:
           # 파일 시스템 사용
 #          uri: file:///Users/ae210433/Desktop/Git/git-local-repo

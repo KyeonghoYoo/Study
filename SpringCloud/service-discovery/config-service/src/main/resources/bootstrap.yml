@@ -2,6 +2,7 @@ encrypt:
 #  key: symmetric_encryption_key_1234567890
   key-store:
 #    location: file:///${user.home}\Desktop\Git\Study\SpringCloud\keystore\apiEncryptionKey.jks # 윈도우일 때
-    location: file://${user.home}/Desktop/Git/Study/SpringCloud/keystore/apiEncryptionKey.jks
+#    location: file://${user.home}/Desktop/Git/Study/SpringCloud/keystore/apiEncryptionKey.jks
+    location: file:/apiEncryptionKey.jks
     password: 1q2w3e4r
     alias: apiEncryptionKey

@@ -1,0 +1,28 @@
+jwt:
+  token:
+    header: Authorization
+    issuer: me.kyeongho
+    # client-secret: ecommerce_service_enough_long_secret_key
+    client-secret: "{cipher}AQAoYn6eAHyVmlOFnOyuBxmYoVe3BkLfTYB3RsNgxacPP1ghNRikW7D+aXQ1H+LtOAh9jlhg9+nC4zi7O8vMCr4PcffVd7A58NV9P/7VzjxuNTLLX1D4dZ4TiSb8NKrL7y7yr+8XifN+76q1a2/ItZ6tpjXd83hhwGfI3ekvpvM75a0X43LkKuGn2tJxLCX9OW5WMNAP8vqwJQDiyctWo+RC9GvA3Prhk2ySJCQ+ZCBC+JjQ0FSYYCfX1zXzo9nWg9FoMhbtQ9Q24PQ3EdimJF4hHbRCBXjZjQIMeLzeyHjyp+pKfVyKfGIiTFp2z4N/ukemb3nOp5tlzlc/Bb02YFy1b8n6fwp31LSk7eHkGvBK3G3kyb7Ai7BhxaBJ3frfYoKyZG18kCCjgsWTr3A513JJ5iElRqVyo+9lBaCaep/6Fg=="
+    access-expiry: 86400000
+    ignore-url:
+      [
+        /refresh,
+        /webjars/**,
+        /static/**,
+        /favicon.ico,
+        /templates/**,
+        /h2/**,
+        /h2-console/**,
+        /v3/api-docs,
+        /swagger-resources/**,
+        /**/favicon.*,
+        /*.html,
+        /**/*.html,
+        /**/*.css,
+        /**/*.js,
+        /**/*.bmp,
+        /**/*.png,
+        /v3/api-docs/swagger-config,
+        /**/*.map,
+      ]

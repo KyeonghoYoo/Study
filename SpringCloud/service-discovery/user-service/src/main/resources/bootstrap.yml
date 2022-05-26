@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    config:
+      # spring.application.name override하여 config 서버에서 외부설정 속성을 가져옴
+      name: user-service
+      uri: http://localhost:8888
+  profiles:
+    active: default

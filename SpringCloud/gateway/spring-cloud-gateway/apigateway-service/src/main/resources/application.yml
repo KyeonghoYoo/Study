@@ -1,0 +1,136 @@
+server:
+  port: 8000
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+#jwt:
+#  token:
+#    header: Authorization
+#    issuer: me.kyeongho
+#    client-secret: user_microservice_enough_long_secret_key
+#    access-expiry: 600000000
+#    ignore-url: [ /refresh, /webjars/**, /static/**, /favicon.ico, /templates/**, /h2/**, /h2-console/**, /v3/api-docs, /swagger-resources/**, /**/favicon.*, /*.html, /**/*.html, /**/*.css, /**/*.js, /**/*.bmp, /**/*.png, /v3/api-docs/swagger-config, /**/*.map ]
+
+spring:
+  application:
+    name: apigateway-service
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+  cloud:
+    gateway:
+      default-filters:
+        - name: GlobalFilter
+          args:
+            baseMessage: Spring Cloud Gateway Global Filter
+            preLogger: true
+            postLogger: true
+      routes:
+        - id: first-service
+          uri: lb://MY-FIRST-SERVICE # Eureka Discovery Service로 부터 MY-FIRST-SERVICE의 위치를 넘겨받아 라우팅함.
+          predicates: # 사전 조건
+            - Path=/first-service/**
+          filters: # 필터
+#            - AddRequestHeader=first-request, first-request-header2
+#            - AddResponseHeader=first-response, first-response-header2
+            - CustomFilter
+        - id: second-service
+          uri: lb://MY-SECOND-SERVICE
+          predicates:
+            - Path=/second-service/**
+          filters:
+#            - AddRequestHeader=second-request, second-request-header2
+#            - AddResponseHeader=second-response, second-response-header2
+            - name: CustomFilter
+            - name: LoggingFilter
+              args:
+                baseMessage: Hi, there.
+                preLogger: true
+                postLogger: true
+        # user-service 라우팅 정보
+#        - id: user-service
+#          uri: lb://USER-SERVICE
+#          predicates:
+#            - Path=/user-service/**
+        # user-service/로그인 API 라우팅 설정
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/login
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+        # user-service/회원가입 API 라우팅 설정
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/users
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/welcome, /user-service/health_check,/user-service/h2-console
+            - Method=GET
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/actuator/**
+            - Method=GET, POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+        # 그 외 user-service의 GET 방식의 API들 라우팅 설정
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/**
+            - Method=GET
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+            - AuthorizationHeaderFilter
+        # catalog-service 라우팅 정보
+        - id: catalog-service
+          uri: lb://CATALOG-SERVICE
+          predicates:
+            - Path=/catalog-service/**
+        # order-service 라우팅 정보
+        - id: order-service
+          uri: lb://ORDER-SERVICE
+          predicates:
+            - Path=/order-service/actuator/**
+            - Method=GET, POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/order-service/(?<segment>.*), /$\{segment}
+        - id: order-service
+          uri: lb://ORDER-SERVICE
+          predicates:
+            - Path=/order-service/**
+        # spring-boot-admin-server 라우팅 정보
+        - id: spring-boot-admin-server
+          uri: lb://SPRING-BOOT-ADMIN-SERVER
+          predicates:
+            - Path=/spring-boot-admin-server/**
+          filters:
+            - RewritePath=/spring-boot-admin-server/(?<segment>.*), /$\{segment}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, refresh, beans, httptrace, busrefresh, info, metrics, prometheus

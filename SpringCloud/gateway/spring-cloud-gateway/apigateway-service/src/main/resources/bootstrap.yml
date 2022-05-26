@@ -1,0 +1,7 @@
+spring:
+  cloud:
+    config:
+      name: ecommerce
+      uri: http://localhost:8888
+  profiles:
+    active: default

@@ -1,0 +1,76 @@
+server:
+  port: 0 # 0이면 Random Port 할당
+
+spring:
+  application:
+    name: order-service
+  zipkin:
+    base-url: http://localhost:9411
+    enabled: true
+  sleuth:
+    sampler:
+      probability: 1.0
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true # 외부 웹 접근 허용
+      path: /h2-console
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+  jpa:
+    open-in-view: false
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+#      ddl-auto: create-drop
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        default_batch_fetch_szie: 100
+  # postgres로 디비 변경
+#  datasource:
+#    url: jdbc:h2:mem:test
+#    driver-class-name: org.h2.Driver
+#    username: sa
+#    password:
+  output:
+    ansi:
+      enabled: always
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}} # ?? ?? ??? ????? ?????? ??? ?? ????? ?? ??
+
+logging:
+  level:
+    org.hibernate.sql: debug
+    me.kyeongho.orderservice: debug
+
+decorator:
+  datasource:
+    p6spy:
+      enable-logging: true
+      multiline: true
+      logging: slf4j
+      tracing:
+        include-parameter-values: true
+
+greeting:
+  message: Welcome to the Simple E-Commerce.
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, busrefresh, info, metrics, prometheus

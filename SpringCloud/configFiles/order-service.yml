@@ -1,7 +1,8 @@
 spring:
   # docker postgres 이미지를 사용해 postgres 디비를 실행하고 연결
   datasource:
-    url: jdbc:postgresql://localhost:5432/ecommerce
+    # url: jdbc:postgresql://localhost:5432/ecommerce
+    url: jdbc:postgresql://pgsql:5432/ecommerce
     driver-class-name: org.postgresql.Driver
     username: postgres
     # password: 1234

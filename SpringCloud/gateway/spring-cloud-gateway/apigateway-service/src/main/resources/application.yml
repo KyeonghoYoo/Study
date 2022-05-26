@@ -112,15 +112,15 @@ spring:
         - id: order-service
           uri: lb://ORDER-SERVICE
           predicates:
-            - Path=/order-service/**
-        - id: order-service
-          uri: lb://ORDER-SERVICE
-          predicates:
             - Path=/order-service/actuator/**
             - Method=GET, POST
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/order-service/(?<segment>.*), /$\{segment}
+        - id: order-service
+          uri: lb://ORDER-SERVICE
+          predicates:
+            - Path=/order-service/**
         # spring-boot-admin-server 라우팅 정보
         - id: spring-boot-admin-server
           uri: lb://SPRING-BOOT-ADMIN-SERVER

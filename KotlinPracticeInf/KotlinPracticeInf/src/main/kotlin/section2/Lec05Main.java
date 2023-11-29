@@ -3,7 +3,7 @@ package section2;
 /**
  * 5강. 코틀린에서 제어문 다루는 방법 자바 코드
  *
- * @see HandilingControlStatementKt
+ * @see HandilingConditionalExpressionsKt
  */
 public class Lec05Main {
 

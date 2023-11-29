@@ -95,9 +95,12 @@ fun judgheNumber(number: Int) {
     }
 
     if (number in listOf(1, 0, -1)) {
-
+        println("어디서 많이 본 숫자입니다.")
+    } else {
+        println("1, 0, -1이 아닙니다.")
     }
 }
+
 
 fun judgheNumber2(number: Int) {
     if (number == 0) {

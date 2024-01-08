@@ -76,7 +76,7 @@ class Person(
     /*
      * 위와 같은 backing field라는 기능을 제공하고 있으나 실무에서는 잘 사용하지 않게 됨. 위 코드는 아래와 같이 대체할 수 있기 때문임.
      */
-    fun getUppercaseName(): String = this.name.uppercase()
+    fun getUppercaseNameAsProperty(): String = this.name.uppercase()
     var uppercaseName: String
         get() = this.name.uppercase()
         set(value) {
